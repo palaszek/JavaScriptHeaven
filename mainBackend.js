@@ -25,10 +25,10 @@ class TaskStatus {
   }
 }
 
-const urlTask = "http://localhost:3000/Task";
-const urlPerson = "http://localhost:3000/Person";
-const urlCategory = "http://localhost:3000/Category";
-const urlTaskStatus = "http://localhost:3000/TaskStatus";
+const urlTasks = "http://localhost:3000/Tasks";
+const urlPersons = "http://localhost:3000/Persons";
+const urlCategories = "http://localhost:3000/Categories";
+const urlTaskStatuses = "http://localhost:3000/TaskStatuses";
 
 var tasks = [];
 var persons = [];
@@ -44,7 +44,7 @@ taskStatuses.push[
 ];
 
 const fetchData = async () => {
-  await fetch(urlTask)
+  await fetch(urlTasks)
     .then((response) => response.json())
     .then(async (data) => {
       for (let task of data) {
@@ -55,7 +55,7 @@ const fetchData = async () => {
       }
     });
 
-  await fetch(urlPerson)
+  await fetch(urlPersons)
     .then((response) => response.json())
     .then(async (data) => {
       for (let person of data) {
@@ -64,11 +64,11 @@ const fetchData = async () => {
       if (persons.length == 0) {
         let defaultName = new Person("Nie przypisano", "Nie przypisano");
         persons.push[defaultName];
-        pushData(defaultName, urlPerson);
+        pushData(defaultName, urlPersons);
       }
     });
 
-  await fetch(urlCategory)
+  await fetch(urlCategories)
     .then((response) => response.json())
     .then(async (data) => {
       for (let category of data) {
@@ -77,24 +77,24 @@ const fetchData = async () => {
       if (persons.length == 0) {
         let defaultCategorie = new Categories("Brak Kategorii");
         persons.push[defaultCategorie];
-        pushData(defaultCategorie, urlCategory);
+        pushData(defaultCategorie, urlCategories);
       }
     });
 
-  await fetch(urlTaskStatus)
+  await fetch(urlTaskStatuses)
     .then((response) => response.json())
     .then(async (data) => {
       for (let status of data) {
         taskStatuses.push(status);
       }
-      if (persons.length == 0) {
-        let defaultStatus1 = new TaskStatus("Rozpoczęty");
+      if (taskStatuses.length == 0) {
+        let defaultStatus1 = new TaskStatus("Brak Kategorii");
         let defaultStatus2 = new TaskStatus("Zakończony");
         let defaultStatus3 = new TaskStatus("W Realizacji");
-        persons.push[(defaultStatus1, defaultStatus2, defaultStatus3)];
-        pushData(defaultStatus1, urlCategory);
-        pushData(defaultStatus2, urlCategory);
-        pushData(defaultStatus3, urlCategory);
+        taskStatuses.push[(defaultStatus1, defaultStatus2, defaultStatus3)];
+        pushData(defaultStatus1, urlTaskStatuses);
+        pushData(defaultStatus2, urlTaskStatuses);
+        pushData(defaultStatus3, urlTaskStatuses);
       }
     });
 
@@ -137,3 +137,16 @@ async function deleteData(removeData, url) {
     //zrób coś dopiero jak usunie dane z servera;
   });
 }
+
+function sortByName(array) {
+  let sortedArray = array;
+  sortedArray.sort((element1, element2) => {
+    if (Object.values(element1)[0] < Object.values(element2)[0]) {
+      return -1;
+    } else return 1;
+  });
+
+  return sortedArray;
+}
+
+fetchData();

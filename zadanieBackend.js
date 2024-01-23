@@ -44,7 +44,7 @@ else {
 }
 */
 
-const fetchData = async () => {
+const fetchDataZad = async () => {
   await fetch(url)
     .then((response) => response.json())
     .then(async (data) => {
@@ -58,7 +58,7 @@ const fetchData = async () => {
   createInitParagon();
 };
 
-fetchData();
+fetchDataZad();
 
 function createInitParagon() {
   var caption = tabela.createCaption();
