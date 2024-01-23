@@ -1,3 +1,13 @@
+class Osoba {
+  constructor(imie, nazwisko) {
+    this.imie = imie;
+    this.nazwisko = nazwisko;
+  }
+}
+
+let os1 = new Osoba("Joanna", "Dark");
+let os2 = new Osoba("beata", "haha");
+
 class Obiekt {
   constructor(nazwa, ilosc, cena) {
     this.nazwa = nazwa;
@@ -5,6 +15,7 @@ class Obiekt {
     this.cena = cena;
     this.suma = cena * ilosc;
     this.suma = Math.round(this.suma * 100) / 100;
+    this.ktos = os1;
   }
 }
 
