@@ -25,6 +25,21 @@ class TaskStatus {
   }
 }
 
+const leftTable = document.getElementById("left-table");
+const rightTable = document.getElementById("right-table");
+
+const tasksTable = leftTable.createElement("tasksTable");
+
+const personsTable = rightTable.createElement("personsTable");
+const categoriesTable = rightTable.createElement("categoriesTable");
+const statusesTable = rightTable.createElement("statusesTable");
+
+const rightTables = [personsTable, categoriesTable, statusesTable];
+
+rightTables.forEach((table) => {
+  table.display.style = "none";
+});
+
 const urlTasks = "http://localhost:3000/Tasks";
 const urlPersons = "http://localhost:3000/Persons";
 const urlCategories = "http://localhost:3000/Categories";
@@ -151,18 +166,25 @@ function sortByName(array) {
 
 function hamburgerToggle() {
   var menuDiv = document.querySelector("#Menu-div");
-  if(menuDiv.style.display !== "none") {
+  if (menuDiv.style.display !== "none") {
     menuDiv.style.display = "none";
   } else {
     menuDiv.style.display = "flex";
   }
 }
 
-function setDateOnNav(){
+function setDateOnNav() {
   var dateNav = document.querySelector("#Nav-date");
   var data = new Date().toLocaleDateString();
   dateNav.textContent = "Data: " + data;
+}
 
+function showHideTables(id) {
+  if (rightTables[id].style.display == "none") {
+    rightTables[id].style.display = "";
+  } else {
+    rightTables[id].style.display = "none";
+  }
 }
 
 setDateOnNav();
