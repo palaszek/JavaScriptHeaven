@@ -28,16 +28,22 @@ class TaskStatus {
 const leftTable = document.getElementById("left-table");
 const rightTable = document.getElementById("right-table");
 
-const tasksTable = leftTable.createElement("tasksTable");
+const tasksTable = document.createElement("tasksTable");
 
-const personsTable = rightTable.createElement("personsTable");
-const categoriesTable = rightTable.createElement("categoriesTable");
-const statusesTable = rightTable.createElement("statusesTable");
+leftTable.appendChild(tasksTable);
+
+const personsTable = document.createElement("personsTable");
+const categoriesTable = document.createElement("categoriesTable");
+const statusesTable = document.createElement("statusesTable");
+
+rightTable.appendChild(personsTable);
+rightTable.appendChild(categoriesTable);
+rightTable.appendChild(statusesTable);
 
 const rightTables = [personsTable, categoriesTable, statusesTable];
 
 rightTables.forEach((table) => {
-  table.display.style = "none";
+  table.style.display = "none";
 });
 
 const urlTasks = "http://localhost:3000/Tasks";
