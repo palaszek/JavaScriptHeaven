@@ -149,4 +149,21 @@ function sortByName(array) {
   return sortedArray;
 }
 
+function hamburgerToggle() {
+  var menuDiv = document.querySelector("#Menu-div");
+  if(menuDiv.style.display !== "none") {
+    menuDiv.style.display = "none";
+  } else {
+    menuDiv.style.display = "flex";
+  }
+}
+
+function setDateOnNav(){
+  var dateNav = document.querySelector("#Nav-date");
+  var data = new Date().toLocaleDateString();
+  dateNav.textContent = "Data: " + data;
+
+}
+
+setDateOnNav();
 fetchData();

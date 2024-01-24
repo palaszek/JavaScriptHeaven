@@ -1,13 +1,138 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Zadanie 7 Paragon</title>
-  </head>
-  <body>
-    <div id="out" onload="zadanieBackend.js"></div>
-    <input id="newProductButton" type="button" value="Dodaj Produkt" />
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Task's Management</title>
+  <link rel="stylesheet" href="view.css" />
+  <script src="https://kit.fontawesome.com/27e22c087e.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <div>
+    <header>
+      <div class="navbar">
+        <h1 class="navbar-header">Zarządzanie Zadaniami Drużyny <i class="fa-solid fa-list-check"></i></h1>
+        <h3 id="Nav-date">Data:</h3>
+        <div class="hamburger-menu">
+          <div class="menu-btn" onclick="hamburgerToggle()">
+            <h1><i class="fa-solid fa-bars"></i></h1>
+          </div>
+          <div id="Menu-div">
+            <a href="https://wp.pl">Jakub Pałaszewski</a>
+            <a href="https://wp.pl">Marcel Herman</a>
+            <a href="https://wp.pl">Politechnika Białostocka</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="table-container">
+      <div id="left-table">
+        <div id="out" onload="zadanieBackend.js"></div>
+        <input id="newProductButton" type="button" value="Dodaj Produkt" />
+      </div>
+      <div id="right-table">
+        <div>
+          <dialog>
+            <form method="dialog" id="editForm">
+              <div>
+                <input type="text" name="nazwa" placeholder="Nazwa">
+                <input type="text" name="ilosc" placeholder="Ilość">
+                <input type="text" name="cena" placeholder="Cena">
+                <input id="submitAddButton" type="submit" value="OK">
+                <input type="reset" value="Anuluj">
+              </div>
+            </form>
+          </dialog>
+          <dialog>
+            <form method="dialog" id="editForm">
+              <div>
+                <input type="text" name="nazwa" placeholder="Nazwa">
+                <input type="text" name="ilosc" placeholder="Ilość">
+                <input type="text" name="cena" placeholder="Cena">
+                <input id="submitAddButton" type="submit" value="OK">
+                <input type="reset" value="Anuluj">
+              </div>
+            </form>
+          </dialog>
+          <dialog>
+            <form method="dialog" id="editForm">
+              <div>
+                <input type="text" name="nazwa" placeholder="Nazwa">
+                <input type="text" name="ilosc" placeholder="Ilość">
+                <input type="text" name="cena" placeholder="Cena">
+                <input id="submitAddButton" type="submit" value="OK">
+                <input type="reset" value="Anuluj">
+              </div>
+            </form>
+          </dialog>
+          <dialog>
+            <form method="dialog" id="editForm">
+              <div>
+                <input type="text" name="nazwa" placeholder="Nazwa">
+                <input type="text" name="ilosc" placeholder="Ilość">
+                <input type="text" name="cena" placeholder="Cena">
+                <input id="submitAddButton" type="submit" value="OK">
+                <input type="reset" value="Anuluj">
+              </div>
+            </form>
+          </dialog>
+          <table>
+            <caption><b>PARAGON<b> 24.01.2024</b></b></caption>
+            <tbody>
+              <tr>
+                <td style="text-align: center;">LP</td>
+                <td style="text-align: center;">Nazwa</td>
+                <td style="text-align: center;">Ilosc</td>
+                <td style="text-align: center;">Cena (zł)</td>
+                <td style="text-align: center;">Suma (zł)</td>
+              </tr>
+              <tr style="background-color: lightgrey;">
+                <td style="width: 25px; text-align: center; padding: 5px;">1</td>
+                <td style="width: 125px;">test</td>
+                <td style="width: 50px; text-align: center;">5</td>
+                <td style="width: 60px; text-align: center;">5.00</td>
+                <td style="width: 75px; text-align: center;">25.00</td>
+                <td><input type="button" value="Edytuj"><input type="button" value="Usun"></td>
+              </tr>
+              <tr style="background-color: darkgrey;">
+                <td style="width: 25px; text-align: center; padding: 5px;">2</td>
+                <td style="width: 125px;">ziemnioki</td>
+                <td style="width: 50px; text-align: center;">5</td>
+                <td style="width: 60px; text-align: center;">5.00</td>
+                <td style="width: 75px; text-align: center;">25.00</td>
+                <td><input type="button" value="Edytuj"><input type="button" value="Usun"></td>
+              </tr>
+              <tr style="background-color: lightgrey;">
+                <td style="width: 25px; text-align: center; padding: 5px;">3</td>
+                <td style="width: 125px;">jest</td>
+                <td style="width: 50px; text-align: center;">3</td>
+                <td style="width: 60px; text-align: center;">3.00</td>
+                <td style="width: 75px; text-align: center;">9.00</td>
+                <td><input type="button" value="Edytuj"><input type="button" value="Usun"></td>
+              </tr>
+              <tr style="background-color: darkgrey;">
+                <td style="width: 25px; text-align: center; padding: 5px;">4</td>
+                <td style="width: 125px;">a</td>
+                <td style="width: 50px; text-align: center;">3</td>
+                <td style="width: 60px; text-align: center;">5.00</td>
+                <td style="width: 75px; text-align: center;">15.00</td>
+                <td><input type="button" value="Edytuj"><input type="button" value="Usun"></td>
+              </tr>
+              <tr style="background-color: lightgrey;">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="text-align: center;">Razem</td>
+                <td style="text-align: center; padding: 5px;">74.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
     <dialog id="addDialog">
       <h2>Okno dialogowe</h2>
       <hr />
@@ -36,7 +161,9 @@
         </div>
       </form>
     </dialog>
-  </body>
+  </div>
+</body>
+
 </html>
 
 <script src="zadanieBackend.js"></script>

@@ -1,0 +1,134 @@
+@font-face {
+    font-family: 'saira';
+    src: url('Fonts/Saira-VariableFont_wdth,wght.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'saira-light';
+    src: url('Fonts/Saira_SemiCondensed-Light.ttf') format('truetype');
+  }
+
+
+table {
+
+}
+
+.navbar {
+    height: 70px;
+    width: 100%;
+    padding-left: 10px;
+    background-color:#08a4ec;
+    color: white;
+    padding: auto;
+
+}
+
+body {
+    font-family: saira-light;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar {
+  display: flex;
+  /*position: relative;*/
+  overflow: hidden;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-header {
+  margin-left: 10px;
+}
+
+.menu-btn {
+
+  height: 70px;
+  width: 70px;
+  margin-right: 20px;
+  text-align: center;
+}
+.menu-btn:hover{
+  background-color: rgba(0,0,0,0.1);
+}
+#Menu-div {
+  background-color:#084cec;
+  position: absolute;
+  top: 70px;
+  right: -10px;
+  display: none;
+  flex-direction: column;
+  width: 200px;
+}
+#Nav-date {
+  margin-left: 50%;
+}
+
+#Menu-div a {
+  width: 100%;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+#Menu-div a:nth-child(odd) {
+  background-color: #0794d4;
+}
+
+#Menu-div a:nth-child(even) {
+  background-color: #08a4ec;
+}
+
+
+.table-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+#left-table {
+  margin-left: 20px;
+}
+
+.left-table-content tr td:nth-child(1) {
+  width: 50px;
+}
+
+.left-table-content tr td:nth-child(2) {
+  width: 125px;
+}
+
+.left-table-content tr:nth-child(odd) {
+  background-color: lightgray !important;
+}
+
+.left-table-content tr:nth-child(even) {
+  background-color: darkgray !important;
+}
+
+.left-table-content tr:nth-child(1) {
+  background-color: white !important;
+}
+
+.left-table-content input {
+  background-color: white !important;
+  border: 1px solid gray;
+  margin: 5px;
+}
+
+.left-table-content input:hover{
+  background-color: #08a4ec !important;
+}
+
+
+#right-table {
+  margin-right: 20px;
+}
+
+.active {
+  border: 1px solid blue;
+  border-radius: 20px;
+}

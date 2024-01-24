@@ -35,6 +35,7 @@ let sumaParagonu = 0;
 const out = document.getElementById("out");
 
 const tabela = document.createElement("TABLE");
+tabela.classList.add("left-table-content");
 /*
 if (localStorage.magazyn != undefined)
   magazynJSON = JSON.parse(localStorage.magazyn);
@@ -63,7 +64,7 @@ fetchDataZad();
 function createInitParagon() {
   var caption = tabela.createCaption();
   var data = new Date().toLocaleDateString();
-  caption.innerHTML = "<b>PARAGON<b/> " + data;
+  caption.innerHTML = "<b>ZADANIA<b/> ";
 
   let row = tabela.insertRow();
   let cell = row.insertCell();

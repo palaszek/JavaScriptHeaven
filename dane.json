@@ -20,6 +20,17 @@
       "cena": 3,
       "suma": 9,
       "id": 4
+    },
+    {
+      "nazwa": "a",
+      "ilosc": 3,
+      "cena": 5,
+      "suma": 15,
+      "ktos": {
+        "imie": "Joanna",
+        "nazwisko": "Dark"
+      },
+      "id": 5
     }
   ],
   "Tasks": [],
