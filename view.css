@@ -90,7 +90,7 @@ body {
 }
 
 #left-table {
-  margin-left: 20px;
+  margin-left: 40px;
 }
 
 .left-table-content tr td:nth-child(1) {
@@ -125,7 +125,26 @@ body {
 
 
 #right-table {
-  margin-right: 20px;
+  margin-right: 40px;
+}
+
+.right-buttons-container {
+  background-color: #08a4ec;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.right-options-btns {
+  background-color: #08a4ec !important;
+  padding: 10px;
+  color: white;
+  border: none;
+  margin: 0px;
+}
+
+.right-options-btns:hover{
+  background-color: #0271a4 !important;
 }
 
 .active {
