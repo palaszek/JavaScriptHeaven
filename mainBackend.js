@@ -6,9 +6,10 @@ class Person {
 }
 
 class Task {
-  constructor(taskName, assignedPerson, status) {
+  constructor(taskName, assignedPerson, category, status) {
     this.taskName = taskName;
     this.assignedPerson = assignedPerson;
+    this.category = category;
     this.status = status;
   }
 }
@@ -28,13 +29,13 @@ class TaskStatus {
 const leftTable = document.getElementById("left-table");
 const rightTable = document.getElementById("right-table");
 
-const tasksTable = document.createElement("tasksTable");
+const tasksTable = document.createElement("TABLE");
 
 leftTable.appendChild(tasksTable);
 
-const personsTable = document.createElement("personsTable");
-const categoriesTable = document.createElement("categoriesTable");
-const statusesTable = document.createElement("statusesTable");
+const personsTable = document.createElement("TABLE");
+const categoriesTable = document.createElement("TABLE");
+const statusesTable = document.createElement("TABLE");
 
 rightTable.appendChild(personsTable);
 rightTable.appendChild(categoriesTable);
@@ -42,9 +43,13 @@ rightTable.appendChild(statusesTable);
 
 const rightTables = [personsTable, categoriesTable, statusesTable];
 
-rightTables.forEach((table) => {
-  table.style.display = "none";
-});
+function hideAllTables() {
+  rightTables.forEach((table) => {
+    table.style.display = "none";
+  });
+}
+
+hideAllTables();
 
 const urlTasks = "http://localhost:3000/Tasks";
 const urlPersons = "http://localhost:3000/Persons";
@@ -121,6 +126,10 @@ const fetchData = async () => {
 
   //createInitParagon();
   //inaczej mowiac inicjalizacja tabel dopiero gdy wczyta dane
+  createInitTaskTable();
+  createInitPersons();
+  createInitCategories();
+  createInitStatuses();
 };
 
 async function pushData(newData, url) {
@@ -187,10 +196,411 @@ function setDateOnNav() {
 
 function showHideTables(id) {
   if (rightTables[id].style.display == "none") {
+    hideAllTables();
     rightTables[id].style.display = "";
   } else {
     rightTables[id].style.display = "none";
   }
+}
+
+function createInitTaskTable() {
+  var caption = tasksTable.createCaption();
+  caption.innerHTML = "<b>ZADANIA<b/> ";
+
+  let row = tasksTable.insertRow();
+  let cell = row.insertCell();
+
+  cell.innerHTML = "LP";
+  cell.style.textAlign = "center";
+
+  cell = row.insertCell();
+  cell.style.textAlign = "center";
+  cell.innerHTML = "Zadanie";
+
+  cell = row.insertCell();
+  cell.style.textAlign = "center";
+  cell.innerHTML = "Przydzielona Osoba";
+
+  cell = row.insertCell();
+  cell.style.textAlign = "center";
+  cell.innerHTML = "Kategoria";
+
+  cell = row.insertCell();
+  cell.style.textAlign = "center";
+  cell.innerHTML = "Status";
+
+  for (let i = 0; i < tasksTable.length; i++) {
+    row = tasksTable.insertRow();
+    cell = row.insertCell();
+
+    cell.style.width = "25px";
+    cell.style.textAlign = "center";
+    cell.style.padding = "5px";
+
+    cell.innerHTML = i + 1;
+
+    cell = row.insertCell();
+    cell.style.width = "125px";
+    cell.innerHTML = tasks[i].taskName;
+
+    cell = row.insertCell();
+    cell.style.width = "50px";
+    cell.style.textAlign = "center";
+    cell.innerHTML = tasks[i].assignedPerson;
+
+    cell = row.insertCell();
+    cell.style.width = "60px";
+    cell.style.textAlign = "center";
+    cell.innerHTML = tasks[i].category;
+
+    cell = row.insertCell();
+    cell.style.width = "75px";
+    cell.style.textAlign = "center";
+    cell.innerHTML = tasks[i].status;
+
+    // var inputButton = addEditButton(i, tasks[i].id);
+
+    cell = row.insertCell();
+    //cell.appendChild(inputButton);
+
+    //var inputButton = addDeleteButton(i, magazynJSON[i].id);
+
+    //cell.appendChild(inputButton);
+
+    if (i % 2 == 0) row.style.backgroundColor = "LightGrey";
+    else row.style.backgroundColor = "DarkGrey";
+  }
+
+  const newProductButton = document.getElementById("newProductButton");
+  const dlg = document.getElementById("addDialog");
+  const form = document.getElementById("addForm");
+
+  newProductButton.onclick = () => {
+    form.reset();
+    dlg.showModal();
+  };
+
+  form.onsubmit = (event) => {
+    if (
+      !parseFloat(form.ilosc.value) ||
+      parseFloat(form.ilosc.value) <= 0 ||
+      !parseFloat(form.cena.value) ||
+      parseFloat(form.cena.value) <= 0
+    ) {
+      alert("Dodaj wartosci liczbowe dodatnie w polach ilosc oraz cena!");
+    } else {
+      if (!form.nazwa.value) {
+        alert("Podaj nazwe produktu!");
+      } else {
+        if (confirm("Jestes pewien ze chcesz dodac ten produkt?") == true) {
+          let newObject = new Obiekt(
+            form.nazwa.value,
+            parseFloat(form.ilosc.value),
+            parseFloat(form.cena.value)
+          );
+
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newObject),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              magazynJSON.push(data);
+              addData(magazynJSON.length);
+            });
+        }
+      }
+    }
+  };
+
+  form.onreset = () => {
+    dlg.close();
+  };
+}
+
+function createInitPersons() {
+  var caption = personsTable.createCaption();
+  caption.innerHTML = "<b>Łosoby<b/> ";
+
+  let row = personsTable.insertRow();
+  let cell = row.insertCell();
+
+  cell.innerHTML = "LP";
+  cell.style.textAlign = "center";
+
+  cell = row.insertCell();
+  cell.style.textAlign = "center";
+  cell.innerHTML = "Imie";
+
+  cell = row.insertCell();
+  cell.style.textAlign = "center";
+  cell.innerHTML = "Nazwisko";
+
+  for (let i = 0; i < persons.length; i++) {
+    row = personsTable.insertRow();
+    cell = row.insertCell();
+
+    cell.style.width = "25px";
+    cell.style.textAlign = "center";
+    cell.style.padding = "5px";
+
+    cell.innerHTML = i + 1;
+
+    cell = row.insertCell();
+    cell.style.width = "125px";
+    cell.innerHTML = persons[i].firstName;
+
+    cell = row.insertCell();
+    cell.style.width = "50px";
+    cell.style.textAlign = "center";
+    cell.innerHTML = persons[i].lastName;
+
+    // var inputButton = addEditButton(i, tasks[i].id);
+
+    cell = row.insertCell();
+    //cell.appendChild(inputButton);
+
+    //var inputButton = addDeleteButton(i, magazynJSON[i].id);
+
+    //cell.appendChild(inputButton);
+
+    if (i % 2 == 0) row.style.backgroundColor = "LightGrey";
+    else row.style.backgroundColor = "DarkGrey";
+  }
+
+  const newProductButton = document.getElementById("newProductButton");
+  const dlg = document.getElementById("addDialog");
+  const form = document.getElementById("addForm");
+
+  newProductButton.onclick = () => {
+    form.reset();
+    dlg.showModal();
+  };
+
+  form.onsubmit = (event) => {
+    if (
+      !parseFloat(form.ilosc.value) ||
+      parseFloat(form.ilosc.value) <= 0 ||
+      !parseFloat(form.cena.value) ||
+      parseFloat(form.cena.value) <= 0
+    ) {
+      alert("Dodaj wartosci liczbowe dodatnie w polach ilosc oraz cena!");
+    } else {
+      if (!form.nazwa.value) {
+        alert("Podaj nazwe produktu!");
+      } else {
+        if (confirm("Jestes pewien ze chcesz dodac ten produkt?") == true) {
+          let newObject = new Obiekt(
+            form.nazwa.value,
+            parseFloat(form.ilosc.value),
+            parseFloat(form.cena.value)
+          );
+
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newObject),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              magazynJSON.push(data);
+              addData(magazynJSON.length);
+            });
+        }
+      }
+    }
+  };
+
+  form.onreset = () => {
+    dlg.close();
+  };
+}
+
+function createInitCategories() {
+  var caption = categoriesTable.createCaption();
+  caption.innerHTML = "<b>Kategorie<b/> ";
+
+  let row = categoriesTable.insertRow();
+  let cell = row.insertCell();
+
+  cell.innerHTML = "LP";
+  cell.style.textAlign = "center";
+
+  cell = row.insertCell();
+  cell.style.textAlign = "center";
+  cell.innerHTML = "Nazwa";
+
+  for (let i = 0; i < categories.length; i++) {
+    row = categoriesTable.insertRow();
+    cell = row.insertCell();
+
+    cell.style.width = "25px";
+    cell.style.textAlign = "center";
+    cell.style.padding = "5px";
+
+    cell.innerHTML = i + 1;
+
+    cell = row.insertCell();
+    cell.style.width = "125px";
+    cell.innerHTML = categories[i].name;
+
+    // var inputButton = addEditButton(i, tasks[i].id);
+
+    cell = row.insertCell();
+    //cell.appendChild(inputButton);
+
+    //var inputButton = addDeleteButton(i, magazynJSON[i].id);
+
+    //cell.appendChild(inputButton);
+
+    if (i % 2 == 0) row.style.backgroundColor = "LightGrey";
+    else row.style.backgroundColor = "DarkGrey";
+  }
+
+  const newProductButton = document.getElementById("newProductButton");
+  const dlg = document.getElementById("addDialog");
+  const form = document.getElementById("addForm");
+
+  newProductButton.onclick = () => {
+    form.reset();
+    dlg.showModal();
+  };
+
+  form.onsubmit = (event) => {
+    if (
+      !parseFloat(form.ilosc.value) ||
+      parseFloat(form.ilosc.value) <= 0 ||
+      !parseFloat(form.cena.value) ||
+      parseFloat(form.cena.value) <= 0
+    ) {
+      alert("Dodaj wartosci liczbowe dodatnie w polach ilosc oraz cena!");
+    } else {
+      if (!form.nazwa.value) {
+        alert("Podaj nazwe produktu!");
+      } else {
+        if (confirm("Jestes pewien ze chcesz dodac ten produkt?") == true) {
+          let newObject = new Obiekt(
+            form.nazwa.value,
+            parseFloat(form.ilosc.value),
+            parseFloat(form.cena.value)
+          );
+
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newObject),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              magazynJSON.push(data);
+              addData(magazynJSON.length);
+            });
+        }
+      }
+    }
+  };
+
+  form.onreset = () => {
+    dlg.close();
+  };
+}
+
+function createInitStatuses() {
+  var caption = statusesTable.createCaption();
+  caption.innerHTML = "<b>Statusy Zadań<b/> ";
+
+  let row = statusesTable.insertRow();
+  let cell = row.insertCell();
+
+  cell.innerHTML = "LP";
+  cell.style.textAlign = "center";
+
+  cell = row.insertCell();
+  cell.style.textAlign = "center";
+  cell.innerHTML = "Nazwa statusu";
+
+  for (let i = 0; i < taskStatuses.length; i++) {
+    row = statusesTable.insertRow();
+    cell = row.insertCell();
+
+    cell.style.width = "25px";
+    cell.style.textAlign = "center";
+    cell.style.padding = "5px";
+
+    cell.innerHTML = i + 1;
+
+    cell = row.insertCell();
+    cell.style.width = "125px";
+    cell.innerHTML = taskStatuses[i].name;
+
+    // var inputButton = addEditButton(i, tasks[i].id);
+
+    cell = row.insertCell();
+    //cell.appendChild(inputButton);
+
+    //var inputButton = addDeleteButton(i, magazynJSON[i].id);
+
+    //cell.appendChild(inputButton);
+
+    if (i % 2 == 0) row.style.backgroundColor = "LightGrey";
+    else row.style.backgroundColor = "DarkGrey";
+  }
+
+  const newProductButton = document.getElementById("newProductButton");
+  const dlg = document.getElementById("addDialog");
+  const form = document.getElementById("addForm");
+
+  newProductButton.onclick = () => {
+    form.reset();
+    dlg.showModal();
+  };
+
+  form.onsubmit = (event) => {
+    if (
+      !parseFloat(form.ilosc.value) ||
+      parseFloat(form.ilosc.value) <= 0 ||
+      !parseFloat(form.cena.value) ||
+      parseFloat(form.cena.value) <= 0
+    ) {
+      alert("Dodaj wartosci liczbowe dodatnie w polach ilosc oraz cena!");
+    } else {
+      if (!form.nazwa.value) {
+        alert("Podaj nazwe produktu!");
+      } else {
+        if (confirm("Jestes pewien ze chcesz dodac ten produkt?") == true) {
+          let newObject = new Obiekt(
+            form.nazwa.value,
+            parseFloat(form.ilosc.value),
+            parseFloat(form.cena.value)
+          );
+
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newObject),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              magazynJSON.push(data);
+              addData(magazynJSON.length);
+            });
+        }
+      }
+    }
+  };
+
+  form.onreset = () => {
+    dlg.close();
+  };
 }
 
 setDateOnNav();
