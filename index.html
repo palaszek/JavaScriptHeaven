@@ -84,26 +84,26 @@
   <dialog id="add-task-dialog">
     <h2>Dodaj nowe zadanie</h2>
     <hr />
-    <form method="dialog" id="addTaskForm">
+    <form method="dialog" id="add-task-form">
       <div>
-        <input type="text" name="nazwa" id="title" placeholder="Nazwa Zadania" />
-        <select name="persons" id="persons"></select>
-        <select name="categories" id="categories"></select>
-        <select name="statuses" id="statuses"></select>
+        <input type="text" name="name" id="title" placeholder="Nazwa Zadania" />
+        <select name="persons" id="addTaskPersons"></select>
+        <select name="categories" id="addTaskCategories"></select>
+        <select name="statuses" id="addTaskStatuses"></select>
         <input id="submitAddButton" type="submit" value="OK" />
         <input type="reset" value="Anuluj" />
       </div>
     </form>
   </dialog>
-  <dialog id="edit-dialog">
+  <dialog id="edit-task-dialog">
     <h2>Edytuj Zadanie</h2>
     <hr />
-    <form method="dialog" id="edit-form">
+    <form method="dialog" id="edit-task-form">
       <div>
         <input type="text" name="name" placeholder="Nazwa Zadania" />
-        <select name="persons" id="persons"></select>
-        <select name="categories" id="categories"></select>
-        <select name="statuses" id="statuses"></select>
+        <select name="persons" id="editTaskPersons"></select>
+        <select name="categories" id="editTaskCategories"></select>
+        <select name="statuses" id="editTaskStatuses"></select>
         <input id="submitAddButton" type="submit" value="OK" />
         <input type="reset" value="Anuluj" />
       </div>

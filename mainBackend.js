@@ -271,42 +271,55 @@ function createInitTaskTable() {
   }
 
   const dlg = document.getElementById("add-task-dialog");
-  const form = document.getElementById("addTaskForm");
+  const form = document.getElementById("add-task-form");
   const newProductButton = addCreateButton(dataType.ETask, form, dlg);
 }
 
+function deleteOptions(sel) {
+  while (sel.length > 0) {
+    sel.remove(0);
+  }
+}
+
 function AddValuesToNewTask() {
-  var sel_persons = document.getElementById("persons");
-  var sel_categories = document.getElementById("categories");
-  var sel_statuses = document.getElementById("statuses");
+  var sel_personsAdd = document.getElementById("addTaskPersons");
+  var sel_categoriesAdd = document.getElementById("addTaskCategories");
+  var sel_statusesAdd = document.getElementById("addTaskStatuses");
 
-  while (sel_persons.length > 0) {
-    sel_persons.remove(0);
-  }
+  var sel_personsEdit = document.getElementById("editTaskPersons");
+  var sel_categoriesEdit = document.getElementById("editTaskCategories");
+  var sel_statusesEdit = document.getElementById("editTaskStatuses");
 
-  while (sel_categories.length > 0) {
-    sel_categories.remove(0);
-  }
-  while (sel_statuses.length > 0) {
-    sel_statuses.remove(0);
-  }
+  deleteOptions(sel_personsAdd);
+  deleteOptions(sel_categoriesAdd);
+  deleteOptions(sel_statusesAdd);
+
+  deleteOptions(sel_personsEdit);
+  deleteOptions(sel_categoriesEdit);
+  deleteOptions(sel_statusesEdit);
 
   personsArray.forEach((element) => {
     var option = document.createElement("option");
     option.text = element.firstName + " " + element.lastName;
-    sel_persons.add(option);
+    var option2 = option.cloneNode(true);
+    sel_personsEdit.add(option);
+    sel_personsAdd.add(option2);
   });
 
   categoriesArray.forEach((element) => {
     var option = document.createElement("option");
     option.text = element.name;
-    sel_categories.add(option);
+    var option2 = option.cloneNode(true);
+    sel_categoriesEdit.add(option);
+    sel_categoriesAdd.add(option2);
   });
 
   statusesArray.forEach((element) => {
     var option = document.createElement("option");
     option.text = element.name;
-    sel_statuses.add(option);
+    var option2 = option.cloneNode(true);
+    sel_statusesEdit.add(option);
+    sel_statusesAdd.add(option2);
   });
 }
 
@@ -481,13 +494,13 @@ function addUpdateButton(table, array, index, id, type) {
   switch (type) {
     case dataType.ETask:
       inputButton.setAttribute("id", "edit-button");
-      dlg = document.getElementById("edit-dialog");
-      form = document.getElementById("edit-form");
+      dlg = document.getElementById("edit-task-dialog");
+      form = document.getElementById("edit-task-form");
       break;
     default:
       inputButton.setAttribute("id", "edit-button");
-      dlg = document.getElementById("edit-dialog");
-      form = document.getElementById("edit-form");
+      dlg = document.getElementById("edit-task-dialog");
+      form = document.getElementById("edit-task-form");
       break;
   }
 
@@ -502,10 +515,10 @@ function addUpdateButton(table, array, index, id, type) {
   switch (type) {
     case dataType.ETask:
       form.onsubmit = () => {
-        Object.values(array[index])[0] = form.name.value;
-        Object.values(array[index])[1] = form.persons.value;
-        Object.values(array[index])[2] = form.categories.value;
-        Object.values(array[index])[3] = form.statuses.value;
+        array[index][Object.keys(array[index])[0]] = form.name.value;
+        array[index][Object.keys(array[index])[1]] = form.persons.value;
+        array[index][Object.keys(array[index])[2]] = form.categories.value;
+        array[index][Object.keys(array[index])[3]] = form.statuses.value;
 
         console.log(array[index]);
         updateData(array[index], urlTasks);
@@ -570,7 +583,7 @@ function addCreateButton(type, form, dlg) {
       form.onsubmit = async (event) => {
         if (confirm("Jestes pewien ze chcesz dodac nowe zadanie?") == true) {
           let newObject = new Task(
-            form.nazwa.value,
+            form.name.value,
             form.persons.value,
             form.categories.value,
             form.statuses.value
@@ -606,7 +619,7 @@ function addCreateButton(type, form, dlg) {
       form.onsubmit = async (event) => {
         if (confirm("Jestes pewien ze chcesz dodac nowe zadanie?") == true) {
           let newObject = new Task(
-            form.nazwa.value,
+            form.name.value,
             form.persons.value,
             form.categories.value,
             form.statuses.value
