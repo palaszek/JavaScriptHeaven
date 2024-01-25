@@ -37,6 +37,10 @@ const personsTable = document.createElement("TABLE");
 const categoriesTable = document.createElement("TABLE");
 const statusesTable = document.createElement("TABLE");
 
+personsTable.classList.add("right-table-content");
+categoriesTable.classList.add("right-table-content");
+statusesTable.classList.add("right-table-content");
+
 rightTable.appendChild(personsTable);
 rightTable.appendChild(categoriesTable);
 rightTable.appendChild(statusesTable);
@@ -329,33 +333,25 @@ function createInitPersons() {
   let cell = row.insertCell();
 
   cell.innerHTML = "LP";
-  cell.style.textAlign = "center";
 
   cell = row.insertCell();
-  cell.style.textAlign = "center";
   cell.innerHTML = "Imie";
 
   cell = row.insertCell();
-  cell.style.textAlign = "center";
   cell.innerHTML = "Nazwisko";
 
   for (let i = 0; i < persons.length; i++) {
     row = personsTable.insertRow();
     cell = row.insertCell();
 
-    cell.style.width = "25px";
-    cell.style.textAlign = "center";
-    cell.style.padding = "5px";
-
     cell.innerHTML = i + 1;
 
     cell = row.insertCell();
-    cell.style.width = "125px";
+
     cell.innerHTML = persons[i].firstName;
 
     cell = row.insertCell();
-    cell.style.width = "50px";
-    cell.style.textAlign = "center";
+
     cell.innerHTML = persons[i].lastName;
 
     // var inputButton = addEditButton(i, tasks[i].id);
@@ -366,9 +362,6 @@ function createInitPersons() {
     //var inputButton = addDeleteButton(i, magazynJSON[i].id);
 
     //cell.appendChild(inputButton);
-
-    if (i % 2 == 0) row.style.backgroundColor = "LightGrey";
-    else row.style.backgroundColor = "DarkGrey";
   }
 
   const newProductButton = document.getElementById("newProductButton");
@@ -429,24 +422,17 @@ function createInitCategories() {
   let cell = row.insertCell();
 
   cell.innerHTML = "LP";
-  cell.style.textAlign = "center";
 
   cell = row.insertCell();
-  cell.style.textAlign = "center";
   cell.innerHTML = "Nazwa";
 
   for (let i = 0; i < categories.length; i++) {
     row = categoriesTable.insertRow();
     cell = row.insertCell();
 
-    cell.style.width = "25px";
-    cell.style.textAlign = "center";
-    cell.style.padding = "5px";
-
     cell.innerHTML = i + 1;
 
     cell = row.insertCell();
-    cell.style.width = "125px";
     cell.innerHTML = categories[i].name;
 
     // var inputButton = addEditButton(i, tasks[i].id);
@@ -457,9 +443,6 @@ function createInitCategories() {
     //var inputButton = addDeleteButton(i, magazynJSON[i].id);
 
     //cell.appendChild(inputButton);
-
-    if (i % 2 == 0) row.style.backgroundColor = "LightGrey";
-    else row.style.backgroundColor = "DarkGrey";
   }
 
   const newProductButton = document.getElementById("newProductButton");
@@ -520,24 +503,18 @@ function createInitStatuses() {
   let cell = row.insertCell();
 
   cell.innerHTML = "LP";
-  cell.style.textAlign = "center";
 
   cell = row.insertCell();
-  cell.style.textAlign = "center";
+
   cell.innerHTML = "Nazwa statusu";
 
   for (let i = 0; i < taskStatuses.length; i++) {
     row = statusesTable.insertRow();
     cell = row.insertCell();
 
-    cell.style.width = "25px";
-    cell.style.textAlign = "center";
-    cell.style.padding = "5px";
-
     cell.innerHTML = i + 1;
 
     cell = row.insertCell();
-    cell.style.width = "125px";
     cell.innerHTML = taskStatuses[i].name;
 
     // var inputButton = addEditButton(i, tasks[i].id);
@@ -548,9 +525,6 @@ function createInitStatuses() {
     //var inputButton = addDeleteButton(i, magazynJSON[i].id);
 
     //cell.appendChild(inputButton);
-
-    if (i % 2 == 0) row.style.backgroundColor = "LightGrey";
-    else row.style.backgroundColor = "DarkGrey";
   }
 
   const newProductButton = document.getElementById("newProductButton");

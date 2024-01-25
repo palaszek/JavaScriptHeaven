@@ -125,7 +125,48 @@ body {
 
 
 #right-table {
+  width: 35%;
   margin-right: 40px;
+}
+.right-table-content {
+  width: 100%;
+}
+.right-table-content tr td{
+  text-align: center;
+  padding: 5px;
+}
+
+.right-table-content tr td:nth-child(1) {
+  width: 50px;
+}
+
+.right-table-content tr td:nth-child(2) {
+  width: 125px;
+}
+.right-table-content tr td:nth-child(3) {
+  width: 125px;
+}
+
+.right-table-content tr:nth-child(odd) {
+  background-color: lightgray !important;
+}
+
+.right-table-content tr:nth-child(even) {
+  background-color: darkgray !important;
+}
+
+.right-table-content tr:nth-child(1) {
+  background-color: white !important;
+}
+
+.right-table-content input {
+  background-color: white !important;
+  border: 1px solid gray;
+  margin: 5px;
+}
+
+.right-table-content input:hover{
+  background-color: #08a4ec !important;
 }
 
 .right-buttons-container {
