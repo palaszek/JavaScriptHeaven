@@ -323,15 +323,15 @@ function AddValuesToNewTask() {
   var sel_categories = document.getElementById("categories");
   var sel_statuses = document.getElementById("statuses");
 
-  for (let i = 0; i < sel_persons.length; i++) {
+  for (let i = 0; i <= sel_persons.length + 1; i++) {
     sel_persons.remove(0);
   }
 
-  for (let i = 0; i < sel_categories.length; i++) {
+  for (let i = 0; i <= sel_categories.length + 1; i++) {
     sel_categories.remove(0);
   }
 
-  for (let i = 0; i < sel_statuses.length; i++) {
+  for (let i = 0; i <= sel_statuses.length + 1; i++) {
     sel_statuses.remove(0);
   }
 
