@@ -15,14 +15,14 @@
   "Tasks": [
     {
       "taskName": "Ubijanie Schabowych",
-      "assignedPerson": "Nie przypisano Nie przypisano",
+      "assignedPerson": "Nie przypisano",
       "category": "Brak Kategorii",
       "status": "W Realizacji",
       "id": 1
     },
     {
       "taskName": "Przeżyć",
-      "assignedPerson": "Nie przypisano Nie przypisano",
+      "assignedPerson": "Nie przypisano",
       "category": "Brak Kategorii",
       "status": "W Realizacji",
       "id": 2
@@ -30,8 +30,8 @@
   ],
   "Persons": [
     {
-      "firstName": "Nie przypisano",
-      "lastName": "Nie przypisano",
+      "firstName": "Nie",
+      "lastName": "przypisano",
       "id": 1
     }
   ],

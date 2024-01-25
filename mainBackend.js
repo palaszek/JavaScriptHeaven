@@ -326,6 +326,9 @@ function createInitPersons() {
   var caption = personsTable.createCaption();
   caption.innerHTML = "<b>Łosoby<b/> ";
 
+  var x = document.createElement("INPUT");
+  x.setAttribute("type", "button");
+
   let row = personsTable.insertRow();
   let cell = row.insertCell();
 
@@ -351,64 +354,17 @@ function createInitPersons() {
 
     cell.innerHTML = personsArray[i].lastName;
 
-    // var inputButton = addEditButton(i, tasks[i].id);
+    var inputButton = addEditButton(i, tasksArray[i].id);
 
     cell = row.insertCell();
-    //cell.appendChild(inputButton);
+    cell.appendChild(inputButton);
 
-    //var inputButton = addDeleteButton(i, magazynJSON[i].id);
+    var inputButton = addDeleteButton(i, tasksArray[i].id);
 
-    //cell.appendChild(inputButton);
+    cell.appendChild(inputButton);
+
   }
 
-  /*const newProductButton = document.getElementById("newProductButton");
-  const dlg = document.getElementById("addDialog");
-  const form = document.getElementById("addForm");
-
-  newProductButton.onclick = () => {
-    form.reset();
-    dlg.showModal();
-  };*/
-
-  /*form.onsubmit = (event) => {
-    if (
-      !parseFloat(form.ilosc.value) ||
-      parseFloat(form.ilosc.value) <= 0 ||
-      !parseFloat(form.cena.value) ||
-      parseFloat(form.cena.value) <= 0
-    ) {
-      alert("Dodaj wartosci liczbowe dodatnie w polach ilosc oraz cena!");
-    } else {
-      if (!form.nazwa.value) {
-        alert("Podaj nazwe produktu!");
-      } else {
-        if (confirm("Jestes pewien ze chcesz dodac ten produkt?") == true) {
-          let newObject = new Obiekt(
-            form.nazwa.value,
-            parseFloat(form.ilosc.value),
-            parseFloat(form.cena.value)
-          );
-
-          fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newObject),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              magazynJSON.push(data);
-              addData(magazynJSON.length);
-            });
-        }
-      }
-    }
-  };
-
-  form.onreset = () => {
-    dlg.close();
-  };*/
 }
 
 function createInitCategories() {
@@ -432,64 +388,16 @@ function createInitCategories() {
     cell = row.insertCell();
     cell.innerHTML = categoriesArray[i].name;
 
-    // var inputButton = addEditButton(i, tasks[i].id);
+    var inputButton = addEditButton(i, tasksArray[i].id);
 
     cell = row.insertCell();
-    //cell.appendChild(inputButton);
+    cell.appendChild(inputButton);
 
-    //var inputButton = addDeleteButton(i, magazynJSON[i].id);
+    var inputButton = addDeleteButton(i, tasksArray[i].id);
 
-    //cell.appendChild(inputButton);
+    cell.appendChild(inputButton);
+
   }
-
-  /*const newProductButton = document.getElementById("newProductButton");
-  const dlg = document.getElementById("addDialog");
-  const form = document.getElementById("addForm");
-
-  newProductButton.onclick = () => {
-    form.reset();
-    dlg.showModal();
-  };*/
-
-  /*form.onsubmit = (event) => {
-    if (
-      !parseFloat(form.ilosc.value) ||
-      parseFloat(form.ilosc.value) <= 0 ||
-      !parseFloat(form.cena.value) ||
-      parseFloat(form.cena.value) <= 0
-    ) {
-      alert("Dodaj wartosci liczbowe dodatnie w polach ilosc oraz cena!");
-    } else {
-      if (!form.nazwa.value) {
-        alert("Podaj nazwe produktu!");
-      } else {
-        if (confirm("Jestes pewien ze chcesz dodac ten produkt?") == true) {
-          let newObject = new Obiekt(
-            form.nazwa.value,
-            parseFloat(form.ilosc.value),
-            parseFloat(form.cena.value)
-          );
-
-          fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newObject),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              magazynJSON.push(data);
-              addData(magazynJSON.length);
-            });
-        }
-      }
-    }
-  };
-
-  form.onreset = () => {
-    dlg.close();
-  };*/
 }
 
 function createInitStatuses() {
@@ -514,64 +422,15 @@ function createInitStatuses() {
     cell = row.insertCell();
     cell.innerHTML = taskStatusesArray[i].name;
 
-    // var inputButton = addEditButton(i, tasks[i].id);
+    var inputButton = addEditButton(i, tasksArray[0].id);
 
     cell = row.insertCell();
-    //cell.appendChild(inputButton);
+    cell.appendChild(inputButton);
 
-    //var inputButton = addDeleteButton(i, magazynJSON[i].id);
+    var inputButton = addDeleteButton(i, tasksArray[0].id);
 
-    //cell.appendChild(inputButton);
+    cell.appendChild(inputButton);
   }
-
-  /*const newProductButton = document.getElementById("newProductButton");
-  const dlg = document.getElementById("addTaskDialog");
-  const form = document.getElementById("addForm");
-
-  newProductButton.onclick = () => {
-    form.reset();
-    dlg.showModal();
-  };*/
-
-  /*form.onsubmit = (event) => {
-    if (
-      !parseFloat(form.ilosc.value) ||
-      parseFloat(form.ilosc.value) <= 0 ||
-      !parseFloat(form.cena.value) ||
-      parseFloat(form.cena.value) <= 0
-    ) {
-      alert("Dodaj wartosci liczbowe dodatnie w polach ilosc oraz cena!");
-    } else {
-      if (!form.nazwa.value) {
-        alert("Podaj nazwe produktu!");
-      } else {
-        if (confirm("Jestes pewien ze chcesz dodac ten produkt?") == true) {
-          let newObject = new Obiekt(
-            form.nazwa.value,
-            parseFloat(form.ilosc.value),
-            parseFloat(form.cena.value)
-          );
-
-          fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newObject),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              magazynJSON.push(data);
-              addData(magazynJSON.length);
-            });
-        }
-      }
-    }
-  };
-
-  form.onreset = () => {
-    dlg.close();
-  };*/
 }
 
 
@@ -610,10 +469,11 @@ function addDeleteButton(index, id) {
 function addEditButton(index, id) {
   var inputButton = document.createElement("Input");
   inputButton.setAttribute("type", "button");
-  inputButton.setAttribute("id", "edit-button")
-  var dlg = document.getElementById("addTaskDialog")
-  var form = document.getElementById("editForm").cloneNode(true);
+  inputButton.setAttribute("id", "edit-button");
+  var dlg = document.getElementById("edit-dialog")
+  var form = document.getElementById("editForm");
   let row = tabela.rows[index + 1];
+  var task = tasksArray[id-1];
 
   inputButton.onclick = () => {
     form.reset();
@@ -622,6 +482,7 @@ function addEditButton(index, id) {
   };
   
   form.onsubmit = () => {
+
   };
 
   form.onreset = () => {
@@ -630,6 +491,10 @@ function addEditButton(index, id) {
   inputButton.setAttribute("value", "Edytuj");
   return inputButton;
 }
+
+
+
+
 
 setDateOnNav();
 fetchData();
