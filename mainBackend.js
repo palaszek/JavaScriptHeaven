@@ -249,7 +249,7 @@ function createInitTaskTable() {
 
     cell.innerHTML = tasksArray[i].status;
 
-     var inputButton = addEditButton(i, tasksArray[i].id);
+    var inputButton = addEditButton(i, tasksArray[i].id);
 
     cell = row.insertCell();
     cell.appendChild(inputButton);
@@ -257,7 +257,6 @@ function createInitTaskTable() {
     var inputButton = addDeleteButton(i, tasksArray[i].id);
 
     cell.appendChild(inputButton);
-
   }
   const newProductButton = document.getElementById("new-task-button");
   const dlg = document.getElementById("addTaskDialog");
@@ -269,7 +268,7 @@ function createInitTaskTable() {
     AddValuesToNewTask();
   };
 
-  form.onsubmit = (event) => {
+  form.onsubmit = async (event) => {
     if (confirm("Jestes pewien ze chcesz dodac nowe zadanie?") == true) {
       let newObject = new Task(
         form.nazwa.value,
@@ -278,7 +277,11 @@ function createInitTaskTable() {
         form.statuses.value
       );
 
-      pushData(newObject, urlTasks);
+      var data = await pushData(newObject, urlTasks);
+
+      tasksArray.push(data);
+
+      addDataToTable(tasksTable, tasksArray);
     }
   };
 
@@ -366,9 +369,7 @@ function createInitPersons() {
     var inputButton = addDeleteButton(i, tasksArray[i].id);
 
     cell.appendChild(inputButton);
-
   }
-
 }
 
 function createInitCategories() {
@@ -406,7 +407,6 @@ function createInitCategories() {
     var inputButton = addDeleteButton(i, tasksArray[i].id);
 
     cell.appendChild(inputButton);
-
   }
 }
 
@@ -415,7 +415,7 @@ function createInitStatuses() {
   caption.innerHTML = "<b>Statusy Zadań<b/> ";
 
   var addStatusesButton = document.createElement("INPUT");
-  addStatusesButton.setAttribute("value", "Dodaj Status")
+  addStatusesButton.setAttribute("value", "Dodaj Status");
   addStatusesButton.setAttribute("type", "button");
   addStatusesButton.style.marginLeft = "100px";
   caption.appendChild(addStatusesButton);
@@ -449,9 +449,6 @@ function createInitStatuses() {
   }
 }
 
-
-
-
 function addDeleteButton(index, id) {
   var inputButton = document.createElement("Input");
   inputButton.setAttribute("type", "button");
@@ -473,7 +470,6 @@ function addDeleteButton(index, id) {
         for (let i = index + 1; i < tasksArray.length + 1; i++) {
           tabela.deleteRow(index + 1);
         }
-
       });
       //localStorage.magazyn = JSON.stringify(magazynJSON);
     }
@@ -486,20 +482,18 @@ function addEditButton(index, id) {
   var inputButton = document.createElement("Input");
   inputButton.setAttribute("type", "button");
   inputButton.setAttribute("id", "edit-button");
-  var dlg = document.getElementById("edit-dialog")
+  var dlg = document.getElementById("edit-dialog");
   var form = document.getElementById("editForm");
   let row = tabela.rows[index + 1];
-  var task = tasksArray[id-1];
+  var task = tasksArray[id - 1];
 
   inputButton.onclick = () => {
     form.reset();
     dlg.showModal();
     AddValuesToNewTask();
   };
-  
-  form.onsubmit = () => {
 
-  };
+  form.onsubmit = () => {};
 
   form.onreset = () => {
     dlg.close();
@@ -508,9 +502,30 @@ function addEditButton(index, id) {
   return inputButton;
 }
 
+function addDataToTable(table, array) {
+  row = table.insertRow();
+  cell = row.insertCell();
 
+  index = array.length - 1;
+  cell.innerHTML = index + 1;
 
+  for (let i = 0; i < Object.values(array[index]).length - 1; i++) {
+    cell = row.insertCell();
+    cell.innerHTML = Object.values(array[index])[i];
+  }
+  /*
+  var inputButton = addEditButton(index, magazynJSON[index].id);
 
+  cell = row.insertCell();
+  cell.appendChild(inputButton);
+
+  var inputButton = addDeleteButton(index, magazynJSON[index].id);
+  cell.appendChild(inputButton);
+
+  */
+  if (index % 2 == 0) row.style.backgroundColor = "LightGrey";
+  else row.style.backgroundColor = "DarkGrey";
+}
 
 setDateOnNav();
 fetchData();
