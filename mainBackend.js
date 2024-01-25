@@ -27,7 +27,7 @@ class Categories {
   }
 }
 
-class TaskStatus {
+class Status {
   constructor(name) {
     this.name = name;
   }
@@ -62,6 +62,8 @@ function hideAllTables() {
 }
 
 hideAllTables();
+
+personsTable.style.display = ""
 
 const urlTasks = "http://localhost:3000/Tasks";
 const urlPersons = "http://localhost:3000/Persons";
@@ -118,9 +120,9 @@ const fetchData = async () => {
         statusesArray.push(status);
       }
       if (statusesArray.length == 0) {
-        let defaultStatus1 = new TaskStatus("Brak Kategorii");
-        let defaultStatus2 = new TaskStatus("Zakończony");
-        let defaultStatus3 = new TaskStatus("W Realizacji");
+        let defaultStatus1 = new Status("Brak Kategorii");
+        let defaultStatus2 = new Status("Zakończony");
+        let defaultStatus3 = new Status("W Realizacji");
         statusesArray.push[(defaultStatus1, defaultStatus2, defaultStatus3)];
         pushData(defaultStatus1, urlTaskStatuses);
         pushData(defaultStatus2, urlTaskStatuses);
@@ -327,7 +329,9 @@ function createInitPersons() {
   var caption = personsTable.createCaption();
   caption.innerHTML = "<b>Łosoby<b/> ";
 
-  var addPersonsButton = addCreateButton(dataType.EPerson);
+  var form = document.getElementById("addPersonForm");
+  var dlg = document.getElementById("add-person-dialog");
+  var addPersonsButton = addCreateButton(dataType.EPerson, form, dlg);
   caption.appendChild(addPersonsButton);
 
   let row = personsTable.insertRow();
@@ -340,6 +344,8 @@ function createInitPersons() {
 
   cell = row.insertCell();
   cell.innerHTML = "Nazwisko";
+
+  cell = row.insertCell();
 
   for (let i = 0; i < personsArray.length; i++) {
     row = personsTable.insertRow();
@@ -417,7 +423,9 @@ function createInitStatuses() {
   var caption = statusesTable.createCaption();
   caption.innerHTML = "<b>Statusy Zadań<b/> ";
 
-  var addStatusesButton = addCreateButton(dataType.EStatus);
+  var form = document.getElementById("addStatusForm");
+  var dlg = document.getElementById("add-status-dialog")
+  var addStatusesButton = addCreateButton(dataType.EStatus, form, dlg);
   caption.appendChild(addStatusesButton);
 
   let row = statusesTable.insertRow();
@@ -581,20 +589,15 @@ function addCreateButton(type, form, dlg) {
       };
 
       form.onsubmit = async (event) => {
-        if (confirm("Jestes pewien ze chcesz dodac nowe zadanie?") == true) {
-          let newObject = new Task(
-            form.name.value,
-            form.persons.value,
-            form.categories.value,
-            form.statuses.value
+          let newObject = new Categories(
+            form.categoryName.value
           );
 
-          var data = await pushData(newObject, urlTasks);
+          var data = await pushData(newObject, urlCategories);
 
-          tasksArray.push(data);
+          categoriesArray.push(data);
 
-          addDataToTable(tasksTable, tasksArray);
-        }
+          addDataToTable(categoriesTable, categoriesArray);
       };
 
       form.onreset = () => {
@@ -603,9 +606,52 @@ function addCreateButton(type, form, dlg) {
       break;
     case dataType.EPerson:
       addButton.setAttribute("value", "Dodaj Osobę");
+      addButton.onclick = () => {
+        form.reset();
+        dlg.showModal();
+        AddValuesToNewTask();
+      };
+
+      form.onsubmit = async (event) => {
+          let newObject = new Person(
+            form.personFirstname.value,
+            form.personLastname.value
+          );
+
+          var data = await pushData(newObject, urlPersons);
+
+          personsArray.push(data);
+
+          addDataToTable(personsTable, personsArray);
+      };
+
+      form.onreset = () => {
+        dlg.close();
+      };
       break;
     case dataType.EStatus:
       addButton.setAttribute("value", "Dodaj Status");
+      addButton.onclick = () => {
+        form.reset();
+        dlg.showModal();
+        AddValuesToNewTask();
+      };
+
+      form.onsubmit = async (event) => {
+          let newObject = new Status(
+            form.statusName.value
+          );
+
+          var data = await pushData(newObject, urlTaskStatuses);
+
+          statusesArray.push(data);
+
+          addDataToTable(statusesTable, statusesArray);  
+      };
+
+      form.onreset = () => {
+        dlg.close();
+      };
       break;
     case dataType.ETask:
       addButton = document.getElementById("new-task-button");
@@ -617,7 +663,6 @@ function addCreateButton(type, form, dlg) {
       };
 
       form.onsubmit = async (event) => {
-        if (confirm("Jestes pewien ze chcesz dodac nowe zadanie?") == true) {
           let newObject = new Task(
             form.name.value,
             form.persons.value,
@@ -630,7 +675,6 @@ function addCreateButton(type, form, dlg) {
           tasksArray.push(data);
 
           addDataToTable(tasksTable, tasksArray);
-        }
       };
 
       form.onreset = () => {

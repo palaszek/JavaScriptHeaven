@@ -14,46 +14,46 @@
   ],
   "Tasks": [
     {
-      "taskName": "baranina na cienkim",
-      "assignedPerson": "Nie przypisano",
-      "category": "Brak Kategorii",
-      "status": "Rozpoczęty",
-      "id": 23
-    },
-    {
-      "taskName": "takie zadanie",
-      "assignedPerson": "",
-      "category": "",
-      "status": "",
-      "id": 24
-    },
-    {
-      "taskName": "testowanie",
-      "assignedPerson": "Nie przypisano",
-      "category": "Brak Kategorii",
-      "status": "Rozpoczęty",
-      "id": 25
-    },
-    {
-      "taskName": "yolo",
-      "assignedPerson": "Nie przypisano",
-      "category": "Brak Kategorii",
-      "status": "Rozpoczęty",
-      "id": 26
-    },
-    {
-      "taskName": "tesick",
+      "taskName": "Ubijanie Schabowych",
       "assignedPerson": "Nie przypisano",
       "category": "Brak Kategorii",
       "status": "W Realizacji",
-      "id": 27
+      "id": 1
     },
     {
-      "taskName": "hehee działa",
+      "taskName": "sdfsdf",
       "assignedPerson": "Nie przypisano",
       "category": "Brak Kategorii",
-      "status": "Zakończony",
-      "id": 28
+      "status": "Rozpoczęty",
+      "id": 3
+    },
+    {
+      "taskName": "klmkl",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "Rozpoczęty",
+      "id": 4
+    },
+    {
+      "taskName": "ffd",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "Rozpoczęty",
+      "id": 5
+    },
+    {
+      "taskName": "jknbjkbjk",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "Rozpoczęty",
+      "id": 6
+    },
+    {
+      "taskName": "Religia",
+      "assignedPerson": "Nie przypisano",
+      "category": "Allah",
+      "status": "Rozpoczęty",
+      "id": 7
     }
   ],
   "Persons": [
@@ -61,12 +61,36 @@
       "firstName": "Nie",
       "lastName": "przypisano",
       "id": 1
+    },
+    {
+      "firstName": "Jakub",
+      "lastName": "Pałaszewski",
+      "id": 2
+    },
+    {
+      "firstName": "Twoja",
+      "lastName": "Mama",
+      "id": 3
     }
   ],
   "Categories": [
     {
       "name": "Brak Kategorii",
       "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "name": "Allah",
+      "id": 4
+    },
+    {
+      "name": "Nowe",
+      "id": 5
     }
   ],
   "TaskStatuses": [
@@ -81,6 +105,14 @@
     {
       "name": "W Realizacji",
       "id": 3
+    },
+    {
+      "name": "Zagubiony",
+      "id": 4
+    },
+    {
+      "name": "Nie żyje",
+      "id": 5
     }
   ]
 }

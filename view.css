@@ -143,11 +143,11 @@ body {
 }
 
 .left-table-content tr:nth-child(odd) {
-  background-color: lightgray !important;
+  background-color: #9cdbf7 !important;
 }
 
 .left-table-content tr:nth-child(even) {
-  background-color: darkgray !important;
+  background-color: #6bc8f4 !important;
 }
 
 .left-table-content tr:nth-child(1) {
@@ -189,15 +189,15 @@ body {
 }
 
 .right-table-content tr:nth-child(odd) {
-  background-color: lightgray !important;
+  background-color: #9cdbf7 !important;
 }
 
 .right-table-content tr:nth-child(even) {
-  background-color: darkgray !important;
+  background-color: #6bc8f4 !important;
 }
 
 .right-table-content tr:nth-child(1) {
-  background-color: white !important;
+  background-color: white!important;
 }
 
 .right-table-content input {
