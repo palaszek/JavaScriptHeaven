@@ -133,16 +133,16 @@ function createInitParagon() {
   addRazem();
   out.appendChild(tabela);
 
-  const newProductButton = document.getElementById("newProductButton");
+  /*const newProductButton = document.getElementById("newProductButton");
   const dlg = document.getElementById("addDialog");
   const form = document.getElementById("addForm");
 
   newProductButton.onclick = () => {
     form.reset();
     dlg.showModal();
-  };
+  };*/
 
-  form.onsubmit = (event) => {
+  /*form.onsubmit = (event) => {
     if (
       !parseFloat(form.ilosc.value) ||
       parseFloat(form.ilosc.value) <= 0 ||
@@ -184,7 +184,7 @@ function createInitParagon() {
 
   form.onreset = () => {
     dlg.close();
-  };
+  };*/
 }
 
 function addData(index) {

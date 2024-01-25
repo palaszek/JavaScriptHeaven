@@ -276,13 +276,15 @@ function createInitTaskTable() {
   }
 
   const newProductButton = document.getElementById("newProductButton");
-  const dlg = document.getElementById("addDialog");
+  const dlg = document.getElementById("addTaskDialog");
   const form = document.getElementById("addForm");
 
   newProductButton.onclick = () => {
     form.reset();
     dlg.showModal();
+    AddValuesToNewTask();
   };
+
 
   form.onsubmit = (event) => {
     if (
@@ -323,6 +325,18 @@ function createInitTaskTable() {
   form.onreset = () => {
     dlg.close();
   };
+}
+
+function AddValuesToNewTask() {
+  var sel_persons = document.getElementById("persons");
+  var sel_categories = document.getElementById("categories");
+  var sel_statuses = document.getElementById("statuses");
+
+  persons.forEach(element => {
+    var option = document.createElement("option");
+    option.text = element.firstName + " " + element.lastName;
+    sel_persons.add(option);
+  });
 }
 
 function createInitPersons() {
@@ -364,16 +378,16 @@ function createInitPersons() {
     //cell.appendChild(inputButton);
   }
 
-  const newProductButton = document.getElementById("newProductButton");
+  /*const newProductButton = document.getElementById("newProductButton");
   const dlg = document.getElementById("addDialog");
   const form = document.getElementById("addForm");
 
   newProductButton.onclick = () => {
     form.reset();
     dlg.showModal();
-  };
+  };*/
 
-  form.onsubmit = (event) => {
+  /*form.onsubmit = (event) => {
     if (
       !parseFloat(form.ilosc.value) ||
       parseFloat(form.ilosc.value) <= 0 ||
@@ -411,7 +425,7 @@ function createInitPersons() {
 
   form.onreset = () => {
     dlg.close();
-  };
+  };*/
 }
 
 function createInitCategories() {
@@ -445,16 +459,16 @@ function createInitCategories() {
     //cell.appendChild(inputButton);
   }
 
-  const newProductButton = document.getElementById("newProductButton");
+  /*const newProductButton = document.getElementById("newProductButton");
   const dlg = document.getElementById("addDialog");
   const form = document.getElementById("addForm");
 
   newProductButton.onclick = () => {
     form.reset();
     dlg.showModal();
-  };
+  };*/
 
-  form.onsubmit = (event) => {
+  /*form.onsubmit = (event) => {
     if (
       !parseFloat(form.ilosc.value) ||
       parseFloat(form.ilosc.value) <= 0 ||
@@ -492,7 +506,7 @@ function createInitCategories() {
 
   form.onreset = () => {
     dlg.close();
-  };
+  };*/
 }
 
 function createInitStatuses() {
@@ -527,16 +541,16 @@ function createInitStatuses() {
     //cell.appendChild(inputButton);
   }
 
-  const newProductButton = document.getElementById("newProductButton");
-  const dlg = document.getElementById("addDialog");
+  /*const newProductButton = document.getElementById("newProductButton");
+  const dlg = document.getElementById("addTaskDialog");
   const form = document.getElementById("addForm");
 
   newProductButton.onclick = () => {
     form.reset();
     dlg.showModal();
-  };
+  };*/
 
-  form.onsubmit = (event) => {
+  /*form.onsubmit = (event) => {
     if (
       !parseFloat(form.ilosc.value) ||
       parseFloat(form.ilosc.value) <= 0 ||
@@ -574,7 +588,7 @@ function createInitStatuses() {
 
   form.onreset = () => {
     dlg.close();
-  };
+  };*/
 }
 
 setDateOnNav();
