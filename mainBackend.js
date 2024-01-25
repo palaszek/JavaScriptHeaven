@@ -270,8 +270,8 @@ function createInitTaskTable() {
     cell.appendChild(inputButton);
   }
   
-  const dlg = document.getElementById("addTaskDialog");
-  const form = document.getElementById("addForm");
+  const dlg = document.getElementById("add-task-dialog");
+  const form = document.getElementById("addTaskForm");
   const newProductButton = addCreateButton(dataType.ETask, form, dlg);
 }
 
@@ -362,7 +362,9 @@ function createInitCategories() {
   var caption = categoriesTable.createCaption();
   caption.innerHTML = "<b>Kategorie<b/> ";
 
-  var addCetegoryButton = addCreateButton(dataType.ECategory);
+  var form = document.getElementById("addCategoryForm");
+  var dlg = document.getElementById("add-category-dialog");
+  var addCetegoryButton = addCreateButton(dataType.ECategory, form, dlg);
   caption.appendChild(addCetegoryButton);
 
   let row = categoriesTable.insertRow();
@@ -541,7 +543,32 @@ function addCreateButton(type, form, dlg){
   switch(type){
     case dataType.ECategory:
       addButton.setAttribute("value", "Dodaj Kategorię");
-      
+      addButton.onclick = () => {
+        form.reset();
+        dlg.showModal();
+        AddValuesToNewTask();
+      };
+    
+      form.onsubmit = async (event) => {
+        if (confirm("Jestes pewien ze chcesz dodac nowe zadanie?") == true) {
+          let newObject = new Task(
+            form.nazwa.value,
+            form.persons.value,
+            form.categories.value,
+            form.statuses.value
+          );
+    
+          var data = await pushData(newObject, urlTasks);
+    
+          tasksArray.push(data);
+    
+          addDataToTable(tasksTable, tasksArray);
+        }
+      };
+    
+      form.onreset = () => {
+        dlg.close();
+      };
       break;
     case dataType.EPerson:
       addButton.setAttribute("value", "Dodaj Osobę");

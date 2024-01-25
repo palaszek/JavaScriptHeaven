@@ -47,10 +47,52 @@
       </div>
     </div>
   </div>
-  <dialog id="addTaskDialog">
+  <dialog id="add-person-dialog">
+    <h2>Dodaj nową osobę</h2>
+    <hr />
+    <form method="dialog" id="addPersonForm">
+      <div>
+        <input type="text" name="nazwa" id="title" placeholder="Nazwa Zadania" />
+        <select name="persons" id="persons"></select>
+        <select name="categories" id="categories"></select>
+        <select name="statuses" id="statuses"></select>
+        <input id="submitAddButton" type="submit" value="OK" />
+        <input type="reset" value="Anuluj" />
+      </div>
+    </form>
+  </dialog>
+  <dialog id="add-category-dialog">
+    <h2>Dodaj nową kategorię</h2>
+    <hr />
+    <form method="dialog" id="addCategoryForm">
+      <div>
+        <input type="text" name="nazwa" id="title" placeholder="Nazwa Zadania" />
+        <select name="persons" id="persons"></select>
+        <select name="categories" id="categories"></select>
+        <select name="statuses" id="statuses"></select>
+        <input id="submitAddButton" type="submit" value="OK" />
+        <input type="reset" value="Anuluj" />
+      </div>
+    </form>
+  </dialog>
+  <dialog id="add-status-dialog">
+    <h2>Dodaj nowy status dla zadań</h2>
+    <hr />
+    <form method="dialog" id="addStatusForm">
+      <div>
+        <input type="text" name="nazwa" id="title" placeholder="Nazwa Zadania" />
+        <select name="persons" id="persons"></select>
+        <select name="categories" id="categories"></select>
+        <select name="statuses" id="statuses"></select>
+        <input id="submitAddButton" type="submit" value="OK" />
+        <input type="reset" value="Anuluj" />
+      </div>
+    </form>
+  </dialog>
+  <dialog id="add-task-dialog">
     <h2>Dodaj nowe zadanie</h2>
     <hr />
-    <form method="dialog" id="addForm">
+    <form method="dialog" id="addTaskForm">
       <div>
         <input type="text" name="nazwa" id="title" placeholder="Nazwa Zadania" />
         <select name="persons" id="persons"></select>
