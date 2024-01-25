@@ -59,6 +59,18 @@
       </div>
     </form>
   </dialog>
+  <dialog id="edit-person-dialog">
+    <h2>Dodaj nową osobę</h2>
+    <hr />
+    <form method="dialog" id="edit-person-form">
+      <div>
+        <input type="text" name="personFirstname" id="editPersonFirstname" placeholder="Imię" />
+        <input type="text" name="personLastname" id="editPersonLastname" placeholder="Nazwisko" />
+        <input id="submitAddButton" type="submit" value="OK" />
+        <input type="reset" value="Anuluj" />
+      </div>
+    </form>
+  </dialog>
   <dialog id="add-category-dialog">
     <h2>Dodaj nową kategorię</h2>
     <hr />
@@ -70,12 +82,34 @@
       </div>
     </form>
   </dialog>
+  <dialog id="edit-category-dialog">
+    <h2>Dodaj nową kategorię</h2>
+    <hr />
+    <form method="dialog" id="edit-category-form">
+      <div>
+        <input type="text" name="categoryName" id="editCategoryName" placeholder="Nazwa Zadania" />
+        <input id="submitAddButton" type="submit" value="OK" />
+        <input type="reset" value="Anuluj" />
+      </div>
+    </form>
+  </dialog>
   <dialog id="add-status-dialog">
     <h2>Dodaj nowy status dla zadań</h2>
     <hr />
     <form method="dialog" id="addStatusForm">
       <div>
         <input type="text" name="statusName" id="status-name" placeholder="Nazwa Zadania" />
+        <input id="submitAddButton" type="submit" value="OK" />
+        <input type="reset" value="Anuluj" />
+      </div>
+    </form>
+  </dialog>
+  <dialog id="edit-status-dialog">
+    <h2>Dodaj nowy status dla zadań</h2>
+    <hr />
+    <form method="dialog" id="edit-status-form">
+      <div>
+        <input type="text" name="statusName" id="editStatusName" placeholder="Nazwa Zadania" />
         <input id="submitAddButton" type="submit" value="OK" />
         <input type="reset" value="Anuluj" />
       </div>

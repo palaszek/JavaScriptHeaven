@@ -63,7 +63,7 @@ function hideAllTables() {
 
 hideAllTables();
 
-personsTable.style.display = ""
+personsTable.style.display = "";
 
 const urlTasks = "http://localhost:3000/Tasks";
 const urlPersons = "http://localhost:3000/Persons";
@@ -166,8 +166,8 @@ async function updateData(updateData, url) {
     });
 }
 
-async function deleteData(removeData, url) {
-  await fetch(url + "/" + removeData.id, {
+async function deleteData(id, url) {
+  await fetch(url + "/" + id, {
     method: "DELETE",
   }).then((data) => {
     //zrób coś dopiero jak usunie dane z servera;
@@ -424,7 +424,7 @@ function createInitStatuses() {
   caption.innerHTML = "<b>Statusy Zadań<b/> ";
 
   var form = document.getElementById("addStatusForm");
-  var dlg = document.getElementById("add-status-dialog")
+  var dlg = document.getElementById("add-status-dialog");
   var addStatusesButton = addCreateButton(dataType.EStatus, form, dlg);
   caption.appendChild(addStatusesButton);
 
@@ -476,16 +476,8 @@ function addDeleteButton(index, id) {
       tasksArray = tasksArray.filter(
         (task) => tasksArray.indexOf(task) != index
       );
-      fetch(urlTasks + "/" + id, {
-        method: "DELETE",
-      }).then((data) => {
-        inputButton.parentNode.parentNode.remove();
-
-        for (let i = index + 1; i < tasksArray.length + 1; i++) {
-          tabela.deleteRow(index + 1);
-        }
-      });
-      //localStorage.magazyn = JSON.stringify(magazynJSON);
+      deleteData(id, urlTasks);
+      inputButton.parentNode.parentNode.remove();
     }
   };
   inputButton.setAttribute("value", "Usun");
@@ -498,15 +490,30 @@ function addUpdateButton(table, array, index, id, type) {
   let form;
   let dlg;
   let row = table.rows[index + 1];
+  inputButton.setAttribute("id", "edit-button");
 
   switch (type) {
     case dataType.ETask:
-      inputButton.setAttribute("id", "edit-button");
+      //inputButton.setAttribute("id", "edit-button");
       dlg = document.getElementById("edit-task-dialog");
       form = document.getElementById("edit-task-form");
       break;
+    case dataType.EPerson:
+      //inputButton.setAttribute("id", "edit-button");
+      dlg = document.getElementById("edit-person-dialog");
+      form = document.getElementById("edit-person-form");
+      break;
+    case dataType.ECategory:
+      //inputButton.setAttribute("id", "edit-button");
+      dlg = document.getElementById("edit-category-dialog");
+      form = document.getElementById("edit-category-form");
+      break;
+    case dataType.ECategory:
+      //inputButton.setAttribute("id", "edit-button");
+      dlg = document.getElementById("edit-status-dialog");
+      form = document.getElementById("edit-status-form");
+      break;
     default:
-      inputButton.setAttribute("id", "edit-button");
       dlg = document.getElementById("edit-task-dialog");
       form = document.getElementById("edit-task-form");
       break;
@@ -528,7 +535,6 @@ function addUpdateButton(table, array, index, id, type) {
         array[index][Object.keys(array[index])[2]] = form.categories.value;
         array[index][Object.keys(array[index])[3]] = form.statuses.value;
 
-        console.log(array[index]);
         updateData(array[index], urlTasks);
 
         row.cells[1].innerHTML = form.name.value;
@@ -536,6 +542,36 @@ function addUpdateButton(table, array, index, id, type) {
         row.cells[3].innerHTML = form.categories.value;
         row.cells[4].innerHTML = form.statuses.value;
       };
+      break;
+    case dataType.EPerson:
+      form.onsubmit = () => {
+        array[index][Object.keys(array[index])[0]] = form.personFirstname.value;
+        array[index][Object.keys(array[index])[1]] = form.personLastname.value;
+
+        updateData(array[index], urlPersons);
+
+        row.cells[1].innerHTML = form.personFirstname.value;
+        row.cells[2].innerHTML = form.personLastname.value;
+      };
+    case dataType.ECategory:
+      form.onsubmit = () => {
+        array[index][Object.keys(array[index])[0]] = form.categoryName.value;
+
+        updateData(array[index], urlCategories);
+
+        row.cells[1].innerHTML = form.categoryName.value;
+      };
+
+      break;
+    case dataType.EStatus:
+      form.onsubmit = () => {
+        array[index][Object.keys(array[index])[0]] = form.statusName.value;
+
+        updateData(array[index], urlTaskStatuses);
+
+        row.cells[1].innerHTML = form.statusName.value;
+      };
+
       break;
     default:
       break;
@@ -548,7 +584,7 @@ function addUpdateButton(table, array, index, id, type) {
   return inputButton;
 }
 
-function addDataToTable(table, array) {
+function addDataToTable(table, array, type) {
   row = table.insertRow();
   cell = row.insertCell();
 
@@ -559,16 +595,15 @@ function addDataToTable(table, array) {
     cell = row.insertCell();
     cell.innerHTML = Object.values(array[index])[i];
   }
-  /*
-  var inputButton = addEditButton(index, magazynJSON[index].id);
+
+  var inputButton = addUpdateButton(table, array, index, array[index].id, type);
 
   cell = row.insertCell();
   cell.appendChild(inputButton);
 
-  var inputButton = addDeleteButton(index, magazynJSON[index].id);
+  var inputButton = addDeleteButton(index, array[index].id);
   cell.appendChild(inputButton);
 
-  */
   if (index % 2 == 0) row.style.backgroundColor = "LightGrey";
   else row.style.backgroundColor = "DarkGrey";
 }
@@ -589,15 +624,13 @@ function addCreateButton(type, form, dlg) {
       };
 
       form.onsubmit = async (event) => {
-          let newObject = new Categories(
-            form.categoryName.value
-          );
+        let newObject = new Categories(form.categoryName.value);
 
-          var data = await pushData(newObject, urlCategories);
+        var data = await pushData(newObject, urlCategories);
 
-          categoriesArray.push(data);
+        categoriesArray.push(data);
 
-          addDataToTable(categoriesTable, categoriesArray);
+        addDataToTable(categoriesTable, categoriesArray, type);
       };
 
       form.onreset = () => {
@@ -613,16 +646,16 @@ function addCreateButton(type, form, dlg) {
       };
 
       form.onsubmit = async (event) => {
-          let newObject = new Person(
-            form.personFirstname.value,
-            form.personLastname.value
-          );
+        let newObject = new Person(
+          form.personFirstname.value,
+          form.personLastname.value
+        );
 
-          var data = await pushData(newObject, urlPersons);
+        var data = await pushData(newObject, urlPersons);
 
-          personsArray.push(data);
+        personsArray.push(data);
 
-          addDataToTable(personsTable, personsArray);
+        addDataToTable(personsTable, personsArray, type);
       };
 
       form.onreset = () => {
@@ -638,15 +671,13 @@ function addCreateButton(type, form, dlg) {
       };
 
       form.onsubmit = async (event) => {
-          let newObject = new Status(
-            form.statusName.value
-          );
+        let newObject = new Status(form.statusName.value);
 
-          var data = await pushData(newObject, urlTaskStatuses);
+        var data = await pushData(newObject, urlTaskStatuses);
 
-          statusesArray.push(data);
+        statusesArray.push(data);
 
-          addDataToTable(statusesTable, statusesArray);  
+        addDataToTable(statusesTable, statusesArray, type);
       };
 
       form.onreset = () => {
@@ -663,18 +694,18 @@ function addCreateButton(type, form, dlg) {
       };
 
       form.onsubmit = async (event) => {
-          let newObject = new Task(
-            form.name.value,
-            form.persons.value,
-            form.categories.value,
-            form.statuses.value
-          );
+        let newObject = new Task(
+          form.name.value,
+          form.persons.value,
+          form.categories.value,
+          form.statuses.value
+        );
 
-          var data = await pushData(newObject, urlTasks);
+        var data = await pushData(newObject, urlTasks);
 
-          tasksArray.push(data);
-
-          addDataToTable(tasksTable, tasksArray);
+        tasksArray.push(data);
+        console.log(data);
+        addDataToTable(tasksTable, tasksArray, type);
       };
 
       form.onreset = () => {

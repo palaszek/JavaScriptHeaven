@@ -14,46 +14,46 @@
   ],
   "Tasks": [
     {
-      "taskName": "Ubijanie Schabowych",
-      "assignedPerson": "Nie przypisano",
-      "category": "Brak Kategorii",
-      "status": "W Realizacji",
-      "id": 1
-    },
-    {
-      "taskName": "sdfsdf",
+      "taskName": "baranina na cienkim",
       "assignedPerson": "Nie przypisano",
       "category": "Brak Kategorii",
       "status": "Rozpoczęty",
-      "id": 3
+      "id": 23
     },
     {
-      "taskName": "klmkl",
+      "taskName": "ziemniak",
       "assignedPerson": "Nie przypisano",
       "category": "Brak Kategorii",
       "status": "Rozpoczęty",
-      "id": 4
+      "id": 31
     },
     {
-      "taskName": "ffd",
+      "taskName": "test",
       "assignedPerson": "Nie przypisano",
       "category": "Brak Kategorii",
       "status": "Rozpoczęty",
-      "id": 5
+      "id": 32
     },
     {
-      "taskName": "jknbjkbjk",
+      "taskName": "testcisas",
       "assignedPerson": "Nie przypisano",
       "category": "Brak Kategorii",
       "status": "Rozpoczęty",
-      "id": 6
+      "id": 34
     },
     {
-      "taskName": "Religia",
+      "taskName": "test",
       "assignedPerson": "Nie przypisano",
-      "category": "Allah",
+      "category": "Brak Kategorii",
       "status": "Rozpoczęty",
-      "id": 7
+      "id": 35
+    },
+    {
+      "taskName": "teścik",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "Rozpoczęty",
+      "id": 36
     }
   ],
   "Persons": [
@@ -63,34 +63,15 @@
       "id": 1
     },
     {
-      "firstName": "Jakub",
-      "lastName": "Pałaszewski",
+      "firstName": "testowe",
+      "lastName": "imei",
       "id": 2
-    },
-    {
-      "firstName": "Twoja",
-      "lastName": "Mama",
-      "id": 3
     }
   ],
   "Categories": [
     {
-      "name": "Brak Kategorii",
+      "name": "test",
       "id": 1
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "name": "Allah",
-      "id": 4
-    },
-    {
-      "name": "Nowe",
-      "id": 5
     }
   ],
   "TaskStatuses": [
@@ -107,12 +88,8 @@
       "id": 3
     },
     {
-      "name": "Zagubiony",
+      "name": "sttus",
       "id": 4
-    },
-    {
-      "name": "Nie żyje",
-      "id": 5
     }
   ]
 }
