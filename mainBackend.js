@@ -278,39 +278,19 @@ function createInitTaskTable() {
   };
 
   form.onsubmit = (event) => {
-    if (
-      !parseFloat(form.ilosc.value) ||
-      parseFloat(form.ilosc.value) <= 0 ||
-      !parseFloat(form.cena.value) ||
-      parseFloat(form.cena.value) <= 0
-    ) {
-      alert("Dodaj wartosci liczbowe dodatnie w polach ilosc oraz cena!");
-    } else {
-      if (!form.nazwa.value) {
-        alert("Podaj nazwe produktu!");
-      } else {
-        if (confirm("Jestes pewien ze chcesz dodac ten produkt?") == true) {
-          let newObject = new Obiekt(
+
+        if (confirm("Jestes pewien ze chcesz dodac nowe zadanie?") == true) {
+          let newObject = new Task(
             form.nazwa.value,
-            parseFloat(form.ilosc.value),
-            parseFloat(form.cena.value)
+            form.persons.value,
+            form.categories.value,
+            form.statuses.value
           );
 
-          fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newObject),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              magazynJSON.push(data);
-              addData(magazynJSON.length);
-            });
+         pushData(newObject, urlTasks)
+
+        
         }
-      }
-    }
   };
 
   form.onreset = () => {
@@ -323,15 +303,15 @@ function AddValuesToNewTask() {
   var sel_categories = document.getElementById("categories");
   var sel_statuses = document.getElementById("statuses");
 
-  for (let i = 0; i <= sel_persons.length + 1; i++) {
+
+  while(sel_persons.length > 0){
     sel_persons.remove(0);
   }
 
-  for (let i = 0; i <= sel_categories.length + 1; i++) {
+  while(sel_categories.length > 0) {
     sel_categories.remove(0);
   }
-
-  for (let i = 0; i <= sel_statuses.length + 1; i++) {
+  while(sel_statuses.length > 0) {
     sel_statuses.remove(0);
   }
 

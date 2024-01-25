@@ -33,7 +33,15 @@
       "id": 5
     }
   ],
-  "Tasks": [],
+  "Tasks": [
+    {
+      "taskName": "testowe",
+      "assignedPerson": "Nie przypisano Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "Rozpoczęty",
+      "id": 1
+    }
+  ],
   "Persons": [
     {
       "firstName": "Nie przypisano",
