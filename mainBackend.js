@@ -285,7 +285,6 @@ function createInitTaskTable() {
     AddValuesToNewTask();
   };
 
-
   form.onsubmit = (event) => {
     if (
       !parseFloat(form.ilosc.value) ||
@@ -332,10 +331,34 @@ function AddValuesToNewTask() {
   var sel_categories = document.getElementById("categories");
   var sel_statuses = document.getElementById("statuses");
 
-  persons.forEach(element => {
+  for (let i = 0; i < sel_persons.length; i++) {
+    sel_persons.remove(i);
+  }
+
+  for (let i = 0; i < sel_categories.length; i++) {
+    sel_categories.remove(i);
+  }
+
+  for (let i = 0; i < sel_statuses.length; i++) {
+    sel_statuses.remove(i);
+  }
+
+  persons.forEach((element) => {
     var option = document.createElement("option");
     option.text = element.firstName + " " + element.lastName;
     sel_persons.add(option);
+  });
+
+  categories.forEach((element) => {
+    var option = document.createElement("option");
+    option.text = element.name;
+    sel_categories.add(option);
+  });
+
+  taskStatuses.forEach((element) => {
+    var option = document.createElement("option");
+    option.text = element.name;
+    sel_statuses.add(option);
   });
 }
 
