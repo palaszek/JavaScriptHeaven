@@ -326,8 +326,11 @@ function createInitPersons() {
   var caption = personsTable.createCaption();
   caption.innerHTML = "<b>Łosoby<b/> ";
 
-  var x = document.createElement("INPUT");
-  x.setAttribute("type", "button");
+  var addPersonsButton = document.createElement("INPUT");
+  addPersonsButton.setAttribute("value", "Dodaj Osobę")
+  addPersonsButton.setAttribute("type", "button");
+  addPersonsButton.style.marginLeft = "100px";
+  caption.appendChild(addPersonsButton);
 
   let row = personsTable.insertRow();
   let cell = row.insertCell();
@@ -371,6 +374,12 @@ function createInitCategories() {
   var caption = categoriesTable.createCaption();
   caption.innerHTML = "<b>Kategorie<b/> ";
 
+  var addCetegoryButton = document.createElement("INPUT");
+  addCetegoryButton.setAttribute("value", "Dodaj Kategorię");
+  addCetegoryButton.setAttribute("type", "button");
+  addCetegoryButton.style.marginLeft = "100px";
+  caption.appendChild(addCetegoryButton);
+
   let row = categoriesTable.insertRow();
   let cell = row.insertCell();
 
@@ -403,6 +412,12 @@ function createInitCategories() {
 function createInitStatuses() {
   var caption = statusesTable.createCaption();
   caption.innerHTML = "<b>Statusy Zadań<b/> ";
+
+  var addStatusesButton = document.createElement("INPUT");
+  addStatusesButton.setAttribute("value", "Dodaj Status")
+  addStatusesButton.setAttribute("type", "button");
+  addStatusesButton.style.marginLeft = "100px";
+  caption.appendChild(addStatusesButton);
 
   let row = statusesTable.insertRow();
   let cell = row.insertCell();
