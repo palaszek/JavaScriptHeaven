@@ -60,19 +60,19 @@ const urlPersons = "http://localhost:3000/Persons";
 const urlCategories = "http://localhost:3000/Categories";
 const urlTaskStatuses = "http://localhost:3000/TaskStatuses";
 
-var tasks = [];
-var persons = [];
-var categories = [];
-var taskStatuses = [];
+var tasksArray = [];
+var personsArray = [];
+var categoriesArray = [];
+var taskStatusesArray = [];
 
 const fetchData = async () => {
   await fetch(urlTasks)
     .then((response) => response.json())
     .then(async (data) => {
       for (let task of data) {
-        tasks.push(task);
+        tasksArray.push(task);
       }
-      if (tasks.length == 0) {
+      if (tasksArray.length == 0) {
         alert("Witaj! Wprowadź tekst na powitanie :D");
       }
     });
@@ -81,11 +81,11 @@ const fetchData = async () => {
     .then((response) => response.json())
     .then(async (data) => {
       for (let person of data) {
-        persons.push(person);
+        personsArray.push(person);
       }
-      if (persons.length == 0) {
+      if (personsArray.length == 0) {
         let defaultName = new Person("Nie przypisano", "Nie przypisano");
-        persons.push[defaultName];
+        personsArray.push[defaultName];
         pushData(defaultName, urlPersons);
       }
     });
@@ -94,11 +94,11 @@ const fetchData = async () => {
     .then((response) => response.json())
     .then(async (data) => {
       for (let category of data) {
-        categories.push(category);
+        categoriesArray.push(category);
       }
-      if (persons.length == 0) {
+      if (personsArray.length == 0) {
         let defaultCategorie = new Categories("Brak Kategorii");
-        persons.push[defaultCategorie];
+        personsArray.push[defaultCategorie];
         pushData(defaultCategorie, urlCategories);
       }
     });
@@ -107,13 +107,15 @@ const fetchData = async () => {
     .then((response) => response.json())
     .then(async (data) => {
       for (let status of data) {
-        taskStatuses.push(status);
+        taskStatusesArray.push(status);
       }
-      if (taskStatuses.length == 0) {
+      if (taskStatusesArray.length == 0) {
         let defaultStatus1 = new TaskStatus("Brak Kategorii");
         let defaultStatus2 = new TaskStatus("Zakończony");
         let defaultStatus3 = new TaskStatus("W Realizacji");
-        taskStatuses.push[(defaultStatus1, defaultStatus2, defaultStatus3)];
+        taskStatusesArray.push[
+          (defaultStatus1, defaultStatus2, defaultStatus3)
+        ];
         pushData(defaultStatus1, urlTaskStatuses);
         pushData(defaultStatus2, urlTaskStatuses);
         pushData(defaultStatus3, urlTaskStatuses);
@@ -225,7 +227,7 @@ function createInitTaskTable() {
   cell.style.textAlign = "center";
   cell.innerHTML = "Status";
 
-  for (let i = 0; i < tasksTable.length; i++) {
+  for (let i = 0; i < tasksArray.length; i++) {
     row = tasksTable.insertRow();
     cell = row.insertCell();
 
@@ -237,22 +239,22 @@ function createInitTaskTable() {
 
     cell = row.insertCell();
     cell.style.width = "125px";
-    cell.innerHTML = tasks[i].taskName;
+    cell.innerHTML = tasksArray[i].taskName;
 
     cell = row.insertCell();
     cell.style.width = "50px";
     cell.style.textAlign = "center";
-    cell.innerHTML = tasks[i].assignedPerson;
+    cell.innerHTML = tasksArray[i].assignedPerson;
 
     cell = row.insertCell();
     cell.style.width = "60px";
     cell.style.textAlign = "center";
-    cell.innerHTML = tasks[i].category;
+    cell.innerHTML = tasksArray[i].category;
 
     cell = row.insertCell();
     cell.style.width = "75px";
     cell.style.textAlign = "center";
-    cell.innerHTML = tasks[i].status;
+    cell.innerHTML = tasksArray[i].status;
 
     // var inputButton = addEditButton(i, tasks[i].id);
 
@@ -278,19 +280,16 @@ function createInitTaskTable() {
   };
 
   form.onsubmit = (event) => {
+    if (confirm("Jestes pewien ze chcesz dodac nowe zadanie?") == true) {
+      let newObject = new Task(
+        form.nazwa.value,
+        form.persons.value,
+        form.categories.value,
+        form.statuses.value
+      );
 
-        if (confirm("Jestes pewien ze chcesz dodac nowe zadanie?") == true) {
-          let newObject = new Task(
-            form.nazwa.value,
-            form.persons.value,
-            form.categories.value,
-            form.statuses.value
-          );
-
-         pushData(newObject, urlTasks)
-
-        
-        }
+      pushData(newObject, urlTasks);
+    }
   };
 
   form.onreset = () => {
@@ -303,31 +302,30 @@ function AddValuesToNewTask() {
   var sel_categories = document.getElementById("categories");
   var sel_statuses = document.getElementById("statuses");
 
-
-  while(sel_persons.length > 0){
+  while (sel_persons.length > 0) {
     sel_persons.remove(0);
   }
 
-  while(sel_categories.length > 0) {
+  while (sel_categories.length > 0) {
     sel_categories.remove(0);
   }
-  while(sel_statuses.length > 0) {
+  while (sel_statuses.length > 0) {
     sel_statuses.remove(0);
   }
 
-  persons.forEach((element) => {
+  personsArray.forEach((element) => {
     var option = document.createElement("option");
     option.text = element.firstName + " " + element.lastName;
     sel_persons.add(option);
   });
 
-  categories.forEach((element) => {
+  categoriesArray.forEach((element) => {
     var option = document.createElement("option");
     option.text = element.name;
     sel_categories.add(option);
   });
 
-  taskStatuses.forEach((element) => {
+  taskStatusesArray.forEach((element) => {
     var option = document.createElement("option");
     option.text = element.name;
     sel_statuses.add(option);
@@ -349,7 +347,7 @@ function createInitPersons() {
   cell = row.insertCell();
   cell.innerHTML = "Nazwisko";
 
-  for (let i = 0; i < persons.length; i++) {
+  for (let i = 0; i < personsArray.length; i++) {
     row = personsTable.insertRow();
     cell = row.insertCell();
 
@@ -357,11 +355,11 @@ function createInitPersons() {
 
     cell = row.insertCell();
 
-    cell.innerHTML = persons[i].firstName;
+    cell.innerHTML = personsArray[i].firstName;
 
     cell = row.insertCell();
 
-    cell.innerHTML = persons[i].lastName;
+    cell.innerHTML = personsArray[i].lastName;
 
     // var inputButton = addEditButton(i, tasks[i].id);
 
@@ -435,14 +433,14 @@ function createInitCategories() {
   cell = row.insertCell();
   cell.innerHTML = "Nazwa";
 
-  for (let i = 0; i < categories.length; i++) {
+  for (let i = 0; i < categoriesArray.length; i++) {
     row = categoriesTable.insertRow();
     cell = row.insertCell();
 
     cell.innerHTML = i + 1;
 
     cell = row.insertCell();
-    cell.innerHTML = categories[i].name;
+    cell.innerHTML = categoriesArray[i].name;
 
     // var inputButton = addEditButton(i, tasks[i].id);
 
@@ -517,14 +515,14 @@ function createInitStatuses() {
 
   cell.innerHTML = "Nazwa statusu";
 
-  for (let i = 0; i < taskStatuses.length; i++) {
+  for (let i = 0; i < taskStatusesArray.length; i++) {
     row = statusesTable.insertRow();
     cell = row.insertCell();
 
     cell.innerHTML = i + 1;
 
     cell = row.insertCell();
-    cell.innerHTML = taskStatuses[i].name;
+    cell.innerHTML = taskStatusesArray[i].name;
 
     // var inputButton = addEditButton(i, tasks[i].id);
 
