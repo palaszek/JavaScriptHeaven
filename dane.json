@@ -14,18 +14,11 @@
   ],
   "Tasks": [
     {
-      "taskName": "Ubijanie Schabowych",
+      "taskName": "baranina na cienkim",
       "assignedPerson": "Nie przypisano",
       "category": "Brak Kategorii",
-      "status": "W Realizacji",
-      "id": 1
-    },
-    {
-      "taskName": "Przeżyć",
-      "assignedPerson": "Nie przypisano",
-      "category": "Brak Kategorii",
-      "status": "W Realizacji",
-      "id": 2
+      "status": "Rozpoczęty",
+      "id": 23
     }
   ],
   "Persons": [

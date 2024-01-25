@@ -1,3 +1,10 @@
+const dataType = Object.freeze({
+  ETask: 0,
+  EPerson: 1,
+  ECategory: 2,
+  EStatus: 3,
+});
+
 class Person {
   constructor(firstName, lastName) {
     this.firstName = firstName;
@@ -64,7 +71,7 @@ const urlTaskStatuses = "http://localhost:3000/TaskStatuses";
 var tasksArray = [];
 var personsArray = [];
 var categoriesArray = [];
-var taskStatusesArray = [];
+var statusesArray = [];
 
 const fetchData = async () => {
   await fetch(urlTasks)
@@ -108,15 +115,13 @@ const fetchData = async () => {
     .then((response) => response.json())
     .then(async (data) => {
       for (let status of data) {
-        taskStatusesArray.push(status);
+        statusesArray.push(status);
       }
-      if (taskStatusesArray.length == 0) {
+      if (statusesArray.length == 0) {
         let defaultStatus1 = new TaskStatus("Brak Kategorii");
         let defaultStatus2 = new TaskStatus("Zakończony");
         let defaultStatus3 = new TaskStatus("W Realizacji");
-        taskStatusesArray.push[
-          (defaultStatus1, defaultStatus2, defaultStatus3)
-        ];
+        statusesArray.push[(defaultStatus1, defaultStatus2, defaultStatus3)];
         pushData(defaultStatus1, urlTaskStatuses);
         pushData(defaultStatus2, urlTaskStatuses);
         pushData(defaultStatus3, urlTaskStatuses);
@@ -249,7 +254,13 @@ function createInitTaskTable() {
 
     cell.innerHTML = tasksArray[i].status;
 
-    var inputButton = addEditButton(i, tasksArray[i].id);
+    var inputButton = addEditButton(
+      tasksTable,
+      tasksArray,
+      i,
+      tasksArray[i].id,
+      dataType.ETask
+    );
 
     cell = row.insertCell();
     cell.appendChild(inputButton);
@@ -318,7 +329,7 @@ function AddValuesToNewTask() {
     sel_categories.add(option);
   });
 
-  taskStatusesArray.forEach((element) => {
+  statusesArray.forEach((element) => {
     var option = document.createElement("option");
     option.text = element.name;
     sel_statuses.add(option);
@@ -361,8 +372,13 @@ function createInitPersons() {
 
     cell.innerHTML = personsArray[i].lastName;
 
-    var inputButton = addEditButton(i, tasksArray[i].id);
-
+    var inputButton = addEditButton(
+      personsTable,
+      personsArray,
+      i,
+      personsArray[0].id,
+      dataType.EPerson
+    );
     cell = row.insertCell();
     cell.appendChild(inputButton);
 
@@ -399,8 +415,13 @@ function createInitCategories() {
     cell = row.insertCell();
     cell.innerHTML = categoriesArray[i].name;
 
-    var inputButton = addEditButton(i, tasksArray[i].id);
-
+    var inputButton = addEditButton(
+      categoriesTable,
+      categoriesArray,
+      i,
+      categoriesArray[0].id,
+      dataType.ECategory
+    );
     cell = row.insertCell();
     cell.appendChild(inputButton);
 
@@ -429,16 +450,22 @@ function createInitStatuses() {
 
   cell.innerHTML = "Nazwa statusu";
 
-  for (let i = 0; i < taskStatusesArray.length; i++) {
+  for (let i = 0; i < statusesArray.length; i++) {
     row = statusesTable.insertRow();
     cell = row.insertCell();
 
     cell.innerHTML = i + 1;
 
     cell = row.insertCell();
-    cell.innerHTML = taskStatusesArray[i].name;
+    cell.innerHTML = statusesArray[i].name;
 
-    var inputButton = addEditButton(i, tasksArray[0].id);
+    var inputButton = addEditButton(
+      statusesTable,
+      statusesArray,
+      i,
+      statusesArray[0].id,
+      dataType.EStatus
+    );
 
     cell = row.insertCell();
     cell.appendChild(inputButton);
@@ -478,19 +505,33 @@ function addDeleteButton(index, id) {
   return inputButton;
 }
 
-function addEditButton(index, id) {
+function addEditButton(table, array, index, id, type) {
   var inputButton = document.createElement("Input");
   inputButton.setAttribute("type", "button");
-  inputButton.setAttribute("id", "edit-button");
-  var dlg = document.getElementById("edit-dialog");
-  var form = document.getElementById("editForm");
-  let row = tabela.rows[index + 1];
-  var task = tasksArray[id - 1];
+  let form;
+  let dlg;
+  let row = table.rows[index + 1];
+  var task = array[id - 1];
+
+  switch (type) {
+    case dataType.ETask:
+      inputButton.setAttribute("id", "edit-button");
+      dlg = document.getElementById("edit-dialog");
+      form = document.getElementById("editForm");
+      break;
+    default:
+      inputButton.setAttribute("id", "edit-button");
+      dlg = document.getElementById("edit-dialog");
+      form = document.getElementById("editForm");
+      break;
+  }
 
   inputButton.onclick = () => {
     form.reset();
     dlg.showModal();
-    AddValuesToNewTask();
+    if (type == dataType.ETask) {
+      AddValuesToNewTask();
+    }
   };
 
   form.onsubmit = () => {};
