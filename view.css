@@ -8,8 +8,8 @@
   }
 
 
-table {
-
+h2 {
+  margin: 0px;
 }
 
 .navbar {
@@ -19,7 +19,6 @@ table {
     background-color:#08a4ec;
     color: white;
     padding: auto;
-
 }
 
 body {
@@ -27,7 +26,7 @@ body {
     margin: 0;
     padding: 0;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .navbar {
@@ -89,6 +88,18 @@ body {
   margin-top: 40px;
 }
 
+#new-task-button {
+  margin-top: 1px;
+  padding: 10px;
+  background-color: #08a4ec !important;
+  color: white;
+  border: none;
+}
+
+#new-task-button:hover {
+  background-color: #0271a4 !important;
+}
+
 .task-text {
   width: 100%;
   text-align: center;
@@ -109,10 +120,10 @@ body {
 }
 
 .left-table-content tr td:nth-child(2) {
-  width: 125px;
+  width: 200px;
 }
 .left-table-content tr td:nth-child(3) {
-  width: 250px;
+  width: 200px;
 }
 .left-table-content tr td:nth-child(4) {
   width: 125px;
@@ -198,7 +209,7 @@ body {
 
 .right-options-btns {
   background-color: #08a4ec !important;
-  padding: 10px;
+  padding: 11.3px;
   color: white;
   border: none;
   margin: 0px;

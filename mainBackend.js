@@ -259,7 +259,7 @@ function createInitTaskTable() {
     cell.appendChild(inputButton);
 
   }
-  const newProductButton = document.getElementById("newProductButton");
+  const newProductButton = document.getElementById("new-task-button");
   const dlg = document.getElementById("addTaskDialog");
   const form = document.getElementById("addForm");
 
@@ -327,7 +327,8 @@ function createInitPersons() {
   caption.innerHTML = "<b>Łosoby<b/> ";
 
   var addPersonsButton = document.createElement("INPUT");
-  addPersonsButton.setAttribute("value", "Dodaj Osobę")
+  addPersonsButton.setAttribute("value", "Dodaj Osobę");
+  addPersonsButton.setAttribute("id", "new-task-button");
   addPersonsButton.setAttribute("type", "button");
   addPersonsButton.style.marginLeft = "100px";
   caption.appendChild(addPersonsButton);
