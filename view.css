@@ -88,6 +88,17 @@ body {
   margin-top: 40px;
 }
 
+#add-button {
+  margin-top: 1px;
+  padding: 10px;
+  background-color: #08a4ec !important;
+  color: white;
+  border: none;
+}
+#add-button:hover {
+  background-color: #0271a4 !important;
+}
+
 #new-task-button {
   margin-top: 1px;
   padding: 10px;
@@ -95,7 +106,6 @@ body {
   color: white;
   border: none;
 }
-
 #new-task-button:hover {
   background-color: #0271a4 !important;
 }

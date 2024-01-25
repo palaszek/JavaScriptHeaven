@@ -269,36 +269,10 @@ function createInitTaskTable() {
 
     cell.appendChild(inputButton);
   }
-  const newProductButton = document.getElementById("new-task-button");
+  
   const dlg = document.getElementById("addTaskDialog");
   const form = document.getElementById("addForm");
-
-  newProductButton.onclick = () => {
-    form.reset();
-    dlg.showModal();
-    AddValuesToNewTask();
-  };
-
-  form.onsubmit = async (event) => {
-    if (confirm("Jestes pewien ze chcesz dodac nowe zadanie?") == true) {
-      let newObject = new Task(
-        form.nazwa.value,
-        form.persons.value,
-        form.categories.value,
-        form.statuses.value
-      );
-
-      var data = await pushData(newObject, urlTasks);
-
-      tasksArray.push(data);
-
-      addDataToTable(tasksTable, tasksArray);
-    }
-  };
-
-  form.onreset = () => {
-    dlg.close();
-  };
+  const newProductButton = addCreateButton(dataType.ETask, form, dlg);
 }
 
 function AddValuesToNewTask() {
@@ -340,11 +314,7 @@ function createInitPersons() {
   var caption = personsTable.createCaption();
   caption.innerHTML = "<b>Łosoby<b/> ";
 
-  var addPersonsButton = document.createElement("INPUT");
-  addPersonsButton.setAttribute("value", "Dodaj Osobę");
-  addPersonsButton.setAttribute("id", "new-task-button");
-  addPersonsButton.setAttribute("type", "button");
-  addPersonsButton.style.marginLeft = "100px";
+  var addPersonsButton = addCreateButton(dataType.EPerson);
   caption.appendChild(addPersonsButton);
 
   let row = personsTable.insertRow();
@@ -392,10 +362,7 @@ function createInitCategories() {
   var caption = categoriesTable.createCaption();
   caption.innerHTML = "<b>Kategorie<b/> ";
 
-  var addCetegoryButton = document.createElement("INPUT");
-  addCetegoryButton.setAttribute("value", "Dodaj Kategorię");
-  addCetegoryButton.setAttribute("type", "button");
-  addCetegoryButton.style.marginLeft = "100px";
+  var addCetegoryButton = addCreateButton(dataType.ECategory);
   caption.appendChild(addCetegoryButton);
 
   let row = categoriesTable.insertRow();
@@ -435,10 +402,7 @@ function createInitStatuses() {
   var caption = statusesTable.createCaption();
   caption.innerHTML = "<b>Statusy Zadań<b/> ";
 
-  var addStatusesButton = document.createElement("INPUT");
-  addStatusesButton.setAttribute("value", "Dodaj Status");
-  addStatusesButton.setAttribute("type", "button");
-  addStatusesButton.style.marginLeft = "100px";
+  var addStatusesButton = addCreateButton(dataType.EStatus);
   caption.appendChild(addStatusesButton);
 
   let row = statusesTable.insertRow();
@@ -566,6 +530,58 @@ function addDataToTable(table, array) {
   */
   if (index % 2 == 0) row.style.backgroundColor = "LightGrey";
   else row.style.backgroundColor = "DarkGrey";
+}
+
+function addCreateButton(type, form, dlg){
+  var addButton = document.createElement("INPUT");
+  addButton.setAttribute("type", "button");
+  addButton.classList.add("add-button");
+  addButton.setAttribute("id", "add-button");
+
+  switch(type){
+    case dataType.ECategory:
+      addButton.setAttribute("value", "Dodaj Kategorię");
+      
+      break;
+    case dataType.EPerson:
+      addButton.setAttribute("value", "Dodaj Osobę");
+      break;
+    case dataType.EStatus:
+      addButton.setAttribute("value", "Dodaj Status");
+      break;
+    case dataType.ETask:
+      addButton = document.getElementById("new-task-button");
+      addButton.setAttribute("value", "Utwórz Zadanie");
+      addButton.onclick = () => {
+        form.reset();
+        dlg.showModal();
+        AddValuesToNewTask();
+      };
+    
+      form.onsubmit = async (event) => {
+        if (confirm("Jestes pewien ze chcesz dodac nowe zadanie?") == true) {
+          let newObject = new Task(
+            form.nazwa.value,
+            form.persons.value,
+            form.categories.value,
+            form.statuses.value
+          );
+    
+          var data = await pushData(newObject, urlTasks);
+    
+          tasksArray.push(data);
+    
+          addDataToTable(tasksTable, tasksArray);
+        }
+      };
+    
+      form.onreset = () => {
+        dlg.close();
+      };
+      break;
+
+  }
+  return addButton;
 }
 
 setDateOnNav();
