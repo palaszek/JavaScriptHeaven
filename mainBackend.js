@@ -37,6 +37,7 @@ const personsTable = document.createElement("TABLE");
 const categoriesTable = document.createElement("TABLE");
 const statusesTable = document.createElement("TABLE");
 
+tasksTable.classList.add("left-table-content");
 personsTable.classList.add("right-table-content");
 categoriesTable.classList.add("right-table-content");
 statusesTable.classList.add("right-table-content");
@@ -203,7 +204,6 @@ function showHideTables(id) {
 
 function createInitTaskTable() {
   var caption = tasksTable.createCaption();
-  caption.innerHTML = "<b>ZADANIA<b/> ";
 
   let row = tasksTable.insertRow();
   let cell = row.insertCell();
@@ -231,44 +231,34 @@ function createInitTaskTable() {
     row = tasksTable.insertRow();
     cell = row.insertCell();
 
-    cell.style.width = "25px";
-    cell.style.textAlign = "center";
-    cell.style.padding = "5px";
-
     cell.innerHTML = i + 1;
 
     cell = row.insertCell();
-    cell.style.width = "125px";
+
     cell.innerHTML = tasksArray[i].taskName;
 
     cell = row.insertCell();
-    cell.style.width = "50px";
-    cell.style.textAlign = "center";
+
     cell.innerHTML = tasksArray[i].assignedPerson;
 
     cell = row.insertCell();
-    cell.style.width = "60px";
-    cell.style.textAlign = "center";
+
     cell.innerHTML = tasksArray[i].category;
 
     cell = row.insertCell();
-    cell.style.width = "75px";
-    cell.style.textAlign = "center";
+
     cell.innerHTML = tasksArray[i].status;
 
-    // var inputButton = addEditButton(i, tasks[i].id);
+     var inputButton = addEditButton(i, tasksArray[i].id);
 
     cell = row.insertCell();
-    //cell.appendChild(inputButton);
+    cell.appendChild(inputButton);
 
-    //var inputButton = addDeleteButton(i, magazynJSON[i].id);
+    var inputButton = addDeleteButton(i, tasksArray[i].id);
 
-    //cell.appendChild(inputButton);
+    cell.appendChild(inputButton);
 
-    if (i % 2 == 0) row.style.backgroundColor = "LightGrey";
-    else row.style.backgroundColor = "DarkGrey";
   }
-
   const newProductButton = document.getElementById("newProductButton");
   const dlg = document.getElementById("addTaskDialog");
   const form = document.getElementById("addForm");
@@ -582,6 +572,63 @@ function createInitStatuses() {
   form.onreset = () => {
     dlg.close();
   };*/
+}
+
+
+
+
+function addDeleteButton(index, id) {
+  var inputButton = document.createElement("Input");
+  inputButton.setAttribute("type", "button");
+  inputButton.setAttribute("id", "delete-button");
+  inputButton.onclick = (event) => {
+    if (
+      confirm(
+        "Wlasnie usuwasz produkt nr " + (index + 1) + ". Jestes pewny?"
+      ) == true
+    ) {
+      tasksArray = tasksArray.filter(
+        (task) => tasksArray.indexOf(task) != index
+      );
+      fetch(urlTasks + "/" + id, {
+        method: "DELETE",
+      }).then((data) => {
+        inputButton.parentNode.parentNode.remove();
+
+        for (let i = index + 1; i < tasksArray.length + 1; i++) {
+          tabela.deleteRow(index + 1);
+        }
+
+      });
+      //localStorage.magazyn = JSON.stringify(magazynJSON);
+    }
+  };
+  inputButton.setAttribute("value", "Usun");
+  return inputButton;
+}
+
+function addEditButton(index, id) {
+  var inputButton = document.createElement("Input");
+  inputButton.setAttribute("type", "button");
+  inputButton.setAttribute("id", "edit-button")
+  var dlg = document.getElementById("addTaskDialog")
+  var form = document.getElementById("editForm").cloneNode(true);
+  let row = tabela.rows[index + 1];
+
+  inputButton.onclick = () => {
+    form.reset();
+    dlg.showModal();
+    AddValuesToNewTask();
+  };
+  
+  form.onsubmit = () => {
+  };
+
+  form.onreset = () => {
+    dlg.close();
+  };
+  inputButton.setAttribute("value", "Edytuj");
+  return inputButton;
 }
 
 setDateOnNav();

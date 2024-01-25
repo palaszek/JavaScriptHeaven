@@ -1,27 +1,6 @@
 {
   "produkt": [
     {
-      "nazwa": "test",
-      "ilosc": 5,
-      "cena": 5,
-      "suma": 25,
-      "id": 2
-    },
-    {
-      "nazwa": "ziemnioki",
-      "ilosc": 5,
-      "cena": 5,
-      "suma": 25,
-      "id": 3
-    },
-    {
-      "nazwa": "jest",
-      "ilosc": 3,
-      "cena": 3,
-      "suma": 9,
-      "id": 4
-    },
-    {
       "nazwa": "a",
       "ilosc": 3,
       "cena": 5,
@@ -35,11 +14,18 @@
   ],
   "Tasks": [
     {
-      "taskName": "testowe",
+      "taskName": "Ubijanie Schabowych",
       "assignedPerson": "Nie przypisano Nie przypisano",
       "category": "Brak Kategorii",
-      "status": "Rozpoczęty",
+      "status": "W Realizacji",
       "id": 1
+    },
+    {
+      "taskName": "Przeżyć",
+      "assignedPerson": "Nie przypisano Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "W Realizacji",
+      "id": 2
     }
   ],
   "Persons": [

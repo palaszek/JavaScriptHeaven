@@ -56,7 +56,7 @@ const fetchDataZad = async () => {
         alert("Witaj! rozpocznij tworzenie paragonu przez dodanie produktu!");
       }
     });
-  createInitParagon();
+  //createInitParagon();
 };
 
 fetchDataZad();
@@ -229,7 +229,7 @@ function addData(index) {
   else row.style.backgroundColor = "DarkGrey";
 }
 
-function addDeleteButton(index, id) {
+/*function addDeleteButton(index, id) {
   var inputButton = document.createElement("Input");
   inputButton.setAttribute("type", "button");
   inputButton.onclick = (event) => {
@@ -323,7 +323,7 @@ function addEditButton(index, id) {
   };
   inputButton.setAttribute("value", "Edytuj");
   return inputButton;
-}
+}*/
 
 function addRazem() {
   row = tabela.insertRow();
