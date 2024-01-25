@@ -65,14 +65,6 @@ var persons = [];
 var categories = [];
 var taskStatuses = [];
 
-persons.push[new Person("Nie przypisano", "Nie przypisano")];
-categories.push[new Categories("Brak Kategorii")];
-taskStatuses.push[
-  (new TaskStatus("Rozpoczęty"),
-  new TaskStatus("Zakończony"),
-  new TaskStatus("W Realizacji"))
-];
-
 const fetchData = async () => {
   await fetch(urlTasks)
     .then((response) => response.json())
@@ -332,15 +324,15 @@ function AddValuesToNewTask() {
   var sel_statuses = document.getElementById("statuses");
 
   for (let i = 0; i < sel_persons.length; i++) {
-    sel_persons.remove(i);
+    sel_persons.remove(0);
   }
 
   for (let i = 0; i < sel_categories.length; i++) {
-    sel_categories.remove(i);
+    sel_categories.remove(0);
   }
 
   for (let i = 0; i < sel_statuses.length; i++) {
-    sel_statuses.remove(i);
+    sel_statuses.remove(0);
   }
 
   persons.forEach((element) => {
