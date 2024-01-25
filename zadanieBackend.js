@@ -118,7 +118,7 @@ function createInitParagon() {
     cell.innerHTML = magazynJSON[i].suma.toFixed(2);
     sumaParagonu += magazynJSON[i].suma;
 
-    var inputButton = addEditButton(i, magazynJSON[i].id);
+    var inputButton = addUpdateButton(i, magazynJSON[i].id);
 
     cell = row.insertCell();
     cell.appendChild(inputButton);
@@ -217,7 +217,7 @@ function addData(index) {
   cell.innerHTML = magazynJSON[index].suma.toFixed(2);
   sumaParagonu += magazynJSON[index].suma;
 
-  var inputButton = addEditButton(index, magazynJSON[index].id);
+  var inputButton = addUpdateButton(index, magazynJSON[index].id);
 
   cell = row.insertCell();
   cell.appendChild(inputButton);
