@@ -14,18 +14,46 @@
   ],
   "Tasks": [
     {
-      "taskName": "baranina na cienkim",
+      "taskName": "Ubijanie Schabowych",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "W Realizacji",
+      "id": 1
+    },
+    {
+      "taskName": "Przeżyć",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "W Realizacji",
+      "id": 2
+    },
+    {
+      "taskName": "sdfsdf",
       "assignedPerson": "Nie przypisano",
       "category": "Brak Kategorii",
       "status": "Rozpoczęty",
-      "id": 23
+      "id": 3
     },
     {
-      "taskName": "takie zadanie",
-      "assignedPerson": "",
-      "category": "",
-      "status": "",
-      "id": 24
+      "taskName": "klmkl",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "Rozpoczęty",
+      "id": 4
+    },
+    {
+      "taskName": "ffd",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "Rozpoczęty",
+      "id": 5
+    },
+    {
+      "taskName": "dfada",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "Rozpoczęty",
+      "id": 6
     }
   ],
   "Persons": [
