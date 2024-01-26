@@ -371,7 +371,7 @@ function createInitPersons() {
     cell = row.insertCell();
     cell.appendChild(inputButton);
 
-    var inputButton = addDeleteButton(i, tasksArray[i].id);
+    var inputButton = addDeleteButton(i, personsArray[i].id);
 
     cell.appendChild(inputButton);
   }
@@ -490,43 +490,45 @@ function addUpdateButton(table, array, index, id, type) {
   let form;
   let dlg;
   let row = table.rows[index + 1];
-  inputButton.setAttribute("id", "edit-button");
+
 
   switch (type) {
     case dataType.ETask:
-      //inputButton.setAttribute("id", "edit-button");
       dlg = document.getElementById("edit-task-dialog");
-      form = document.getElementById("edit-task-form");
+      form = document.getElementById("edit-task-form").cloneNode(true);
       break;
     case dataType.EPerson:
-      //inputButton.setAttribute("id", "edit-button");
       dlg = document.getElementById("edit-person-dialog");
-      form = document.getElementById("edit-person-form");
+      form = document.getElementById("edit-person-form").cloneNode(true);
       break;
     case dataType.ECategory:
-      //inputButton.setAttribute("id", "edit-button");
       dlg = document.getElementById("edit-category-dialog");
-      form = document.getElementById("edit-category-form");
+      form = document.getElementById("edit-category-form").cloneNode(true);
       break;
-    case dataType.ECategory:
-      //inputButton.setAttribute("id", "edit-button");
+    case dataType.EStatus:
       dlg = document.getElementById("edit-status-dialog");
-      form = document.getElementById("edit-status-form");
+      form = document.getElementById("edit-status-form").cloneNode(true);
       break;
     default:
       dlg = document.getElementById("edit-task-dialog");
-      form = document.getElementById("edit-task-form");
+      form = document.getElementById("edit-task-form").cloneNode(true);
       break;
   }
+  var out = document.getElementById("out");
+  out.appendChild(dlg);
+
 
   inputButton.onclick = () => {
     form.reset();
     dlg.showModal();
+    console.log("INDEXONCLICK: " + index);
+    console.log("TYPEONCLICK: " + type)
     if (type == dataType.ETask) {
       AddValuesToNewTask();
     }
   };
 
+  console.log("PRZEDSWITCHEM: " + type);
   switch (type) {
     case dataType.ETask:
       form.onsubmit = () => {
@@ -545,6 +547,8 @@ function addUpdateButton(table, array, index, id, type) {
       break;
     case dataType.EPerson:
       form.onsubmit = () => {
+        console.log("INDEXSUBMIT: " + index);
+        console.log("PRZEDSWITCHEM: " + type);
         array[index][Object.keys(array[index])[0]] = form.personFirstname.value;
         array[index][Object.keys(array[index])[1]] = form.personLastname.value;
 
@@ -553,6 +557,7 @@ function addUpdateButton(table, array, index, id, type) {
         row.cells[1].innerHTML = form.personFirstname.value;
         row.cells[2].innerHTML = form.personLastname.value;
       };
+      break;
     case dataType.ECategory:
       form.onsubmit = () => {
         array[index][Object.keys(array[index])[0]] = form.categoryName.value;
@@ -574,6 +579,7 @@ function addUpdateButton(table, array, index, id, type) {
 
       break;
     default:
+      console.log("PRZEDSWITCHEM: " + type);
       break;
   }
 
