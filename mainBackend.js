@@ -491,38 +491,38 @@ function addUpdateButton(table, array, index, id, type) {
   let dlg;
   let row = table.rows[index + 1];
 
-
   switch (type) {
     case dataType.ETask:
-      dlg = document.getElementById("edit-task-dialog");
+      dlg = document.getElementById("edit-task-dialog").cloneNode(true);
       form = document.getElementById("edit-task-form").cloneNode(true);
       break;
     case dataType.EPerson:
-      dlg = document.getElementById("edit-person-dialog");
+      dlg = document.getElementById("edit-person-dialog").cloneNode(true);
       form = document.getElementById("edit-person-form").cloneNode(true);
       break;
     case dataType.ECategory:
-      dlg = document.getElementById("edit-category-dialog");
+      dlg = document.getElementById("edit-category-dialog").cloneNode(true);
       form = document.getElementById("edit-category-form").cloneNode(true);
       break;
     case dataType.EStatus:
-      dlg = document.getElementById("edit-status-dialog");
+      dlg = document.getElementById("edit-status-dialog").cloneNode(true);
       form = document.getElementById("edit-status-form").cloneNode(true);
       break;
     default:
-      dlg = document.getElementById("edit-task-dialog");
+      dlg = document.getElementById("edit-task-dialog").cloneNode(true);
       form = document.getElementById("edit-task-form").cloneNode(true);
       break;
   }
+  dlg = document.createElement("dialog");
   var out = document.getElementById("out");
+  dlg.appendChild(form);
   out.appendChild(dlg);
-
 
   inputButton.onclick = () => {
     form.reset();
     dlg.showModal();
     console.log("INDEXONCLICK: " + index);
-    console.log("TYPEONCLICK: " + type)
+    console.log("TYPEONCLICK: " + type);
     if (type == dataType.ETask) {
       AddValuesToNewTask();
     }

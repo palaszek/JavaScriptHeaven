@@ -14,6 +14,20 @@
   ],
   "Tasks": [
     {
+      "taskName": "baranina na cienkim",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "Rozpoczęty",
+      "id": 23
+    },
+    {
+      "taskName": "ziemniak",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "Rozpoczęty",
+      "id": 31
+    },
+    {
       "taskName": "test",
       "assignedPerson": "Nie przypisano",
       "category": "Brak Kategorii",
@@ -33,6 +47,13 @@
       "category": "Brak Kategorii",
       "status": "Rozpoczęty",
       "id": 35
+    },
+    {
+      "taskName": "teścik",
+      "assignedPerson": "Nie przypisano",
+      "category": "Brak Kategorii",
+      "status": "Rozpoczęty",
+      "id": 36
     }
   ],
   "Persons": [
@@ -42,33 +63,20 @@
       "id": 1
     },
     {
-      "firstName": "testowe",
-      "lastName": "imei",
+      "firstName": "lego city",
+      "lastName": "potrzebuje pomocy",
       "id": 2
     },
     {
-      "firstName": "aa",
-      "lastName": "aa",
+      "firstName": "hej",
+      "lastName": "2",
       "id": 3
-    },
-    {
-      "firstName": "d",
-      "lastName": "d",
-      "id": 4
     }
   ],
   "Categories": [
     {
-      "name": "Brak Kategorii",
+      "name": "test",
       "id": 1
-    },
-    {
-      "name": "Brak Kategori",
-      "id": 2
-    },
-    {
-      "name": "aa",
-      "id": 3
     }
   ],
   "TaskStatuses": [
@@ -85,7 +93,7 @@
       "id": 3
     },
     {
-      "name": "aa",
+      "name": "sttus",
       "id": 4
     }
   ]
