@@ -283,14 +283,22 @@ function deleteOptions(sel) {
   }
 }
 
-function AddValuesToNewTask() {
+function AddValuesToNewTask(id, type) {
   var sel_personsAdd = document.getElementById("addTaskPersons");
   var sel_categoriesAdd = document.getElementById("addTaskCategories");
   var sel_statusesAdd = document.getElementById("addTaskStatuses");
 
-  var sel_personsEdit = document.getElementById("editTaskPersons");
-  var sel_categoriesEdit = document.getElementById("editTaskCategories");
-  var sel_statusesEdit = document.getElementById("editTaskStatuses");
+  if (type == dataType.ETask && id != -1) {
+    var form = document.getElementById("edit-task-form" + id);
+    console.log(form);
+    var sel_personsEdit = form.elements["persons"];
+    var sel_categoriesEdit = form.elements["categories"];
+    var sel_statusesEdit = form.elements["statuses"];
+  } else {
+    var sel_personsEdit = document.getElementById("editTaskPersons");
+    var sel_categoriesEdit = document.getElementById("editTaskCategories");
+    var sel_statusesEdit = document.getElementById("editTaskStatuses");
+  }
 
   deleteOptions(sel_personsAdd);
   deleteOptions(sel_categoriesAdd);
@@ -552,6 +560,8 @@ function addUpdateButton(table, array, index, id, type) {
     case dataType.ETask:
       dlg = document.getElementById("edit-task-dialog").cloneNode(true);
       form = document.getElementById("edit-task-form").cloneNode(true);
+      dlg.id += id;
+      form.id += id;
       break;
     case dataType.EPerson:
       dlg = document.getElementById("edit-person-dialog").cloneNode(true);
@@ -571,18 +581,18 @@ function addUpdateButton(table, array, index, id, type) {
       break;
   }
 
-  inputButton.onclick = () => {
-    form.reset();
-    dlg.showModal();
-    if (type == dataType.ETask) {
-      AddValuesToNewTask();
-    }
-  };
-
   dlg = document.createElement("dialog");
   var out = document.getElementById("out");
   dlg.appendChild(form);
   out.appendChild(dlg);
+
+  inputButton.onclick = () => {
+    form.reset();
+    dlg.showModal();
+    if (type == dataType.ETask) {
+      AddValuesToNewTask(id, type);
+    }
+  };
 
   switch (type) {
     case dataType.ETask:
@@ -681,7 +691,7 @@ function addCreateButton(type, form, dlg) {
       addButton.onclick = () => {
         form.reset();
         dlg.showModal();
-        AddValuesToNewTask();
+        AddValuesToNewTask(0, type);
       };
 
       form.onsubmit = async (event) => {
@@ -703,7 +713,7 @@ function addCreateButton(type, form, dlg) {
       addButton.onclick = () => {
         form.reset();
         dlg.showModal();
-        AddValuesToNewTask();
+        AddValuesToNewTask(0, type);
       };
 
       form.onsubmit = async (event) => {
@@ -728,7 +738,7 @@ function addCreateButton(type, form, dlg) {
       addButton.onclick = () => {
         form.reset();
         dlg.showModal();
-        AddValuesToNewTask();
+        AddValuesToNewTask(0, type);
       };
 
       form.onsubmit = async (event) => {
@@ -751,7 +761,7 @@ function addCreateButton(type, form, dlg) {
       addButton.onclick = () => {
         form.reset();
         dlg.showModal();
-        AddValuesToNewTask();
+        AddValuesToNewTask(-1, type);
       };
 
       form.onsubmit = async (event) => {

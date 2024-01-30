@@ -28,10 +28,10 @@
       "id": 32
     },
     {
-      "taskName": "tet",
-      "assignedPerson": "",
-      "category": "",
-      "status": "",
+      "taskName": "lego city",
+      "assignedPerson": "lego city potrzebuje pomocy",
+      "category": "peepo",
+      "status": "sttus",
       "id": 34
     },
     {
@@ -47,6 +47,13 @@
       "category": "Brak Kategorii",
       "status": "Rozpoczęty",
       "id": 36
+    },
+    {
+      "taskName": "",
+      "assignedPerson": "ziemniaka ziemniakowskiego",
+      "category": "test",
+      "status": "Rozpoczęty",
+      "id": 37
     }
   ],
   "Persons": [
