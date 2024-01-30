@@ -99,14 +99,14 @@ body {
   background-color: #0271a4 !important;
 }
 
-#new-task-button {
+#new-task-button, #sort-button {
   margin-top: 1px;
   padding: 10px;
   background-color: #08a4ec !important;
   color: white;
   border: none;
 }
-#new-task-button:hover {
+#new-task-button:hover, #sort-button:hover {
   background-color: #0271a4 !important;
 }
 

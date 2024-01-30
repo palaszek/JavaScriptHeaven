@@ -183,43 +183,40 @@ function sortByName(table) {
   });
 }
 
+var isAscending = true; // Zmienna globalna do śledzenia kierunku sortowania
+
 function sortTable() {
-  var table, rows, switching, i, x, y, shouldSwitch;
-  table = tasksTable;
+  var table = tasksTable;
+  var rows, switching, i, x, y, shouldSwitch;
   switching = true;
-  /* Make a loop that will continue until
-  no switching has been done: */
+
   while (switching) {
-    // Start by saying: no switching is done:
     switching = false;
     rows = table.rows;
-    /* Loop through all table rows (except the
-    first, which contains table headers): */
-    for (i = 1; i < rows.length - 1; i++) {
-      // Start by saying there should be no switching:
+
+    for (i = 1; i < (rows.length - 1); i++) {
       shouldSwitch = false;
-      /* Get the two elements you want to compare,
-      one from current row and one from the next: */
-      x = rows[i].cells[1];
+      x = rows[i].cells[1]; // Załóżmy, że sortujemy według drugiej kolumny
       y = rows[i + 1].cells[1];
-      // Check if the two rows should switch place:
-      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-        // If so, mark as a switch and break the loop:
+
+      // Sprawdzanie kierunku sortowania i decydowanie o przełączeniu
+      if ((isAscending && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) ||
+          (!isAscending && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase())) {
         shouldSwitch = true;
         break;
       }
     }
+
     if (shouldSwitch) {
-      /* If a switch has been marked, make the switch
-      and mark that a switch has been done: */
       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
       rows[i].cells[0].innerHTML = rows[i + 1].cells[0].innerHTML;
       rows[i + 1].cells[0].innerHTML++;
       switching = true;
     }
   }
-}
 
+  isAscending = !isAscending; // Zmiana kierunku sortowania na przeciwny
+}
 function hamburgerToggle() {
   var menuDiv = document.querySelector("#Menu-div");
   if (menuDiv.style.display !== "none") {
@@ -236,7 +233,6 @@ function setDateOnNav() {
 }
 
 function showHideTables(id) {
-  sortTable();
   if (rightTables[id].style.display == "none") {
     hideAllTables();
     rightTables[id].style.display = "";
@@ -799,6 +795,11 @@ function addCreateButton(type, form, dlg) {
         dlg.showModal();
         AddValuesToNewTask(-1, type);
       };
+
+      sortButton = document.getElementById("sort-button");
+      sortButton.onclick = () => {
+        sortTable();
+      }
 
       form.onsubmit = async (event) => {
         let newObject = new Task(
