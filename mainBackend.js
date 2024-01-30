@@ -267,7 +267,7 @@ function createInitTaskTable() {
     cell = row.insertCell();
     cell.appendChild(inputButton);
 
-    var inputButton = addDeleteButton(i, tasksArray[i].id);
+    var inputButton = addDeleteButton(i, tasksArray[i].id, dataType.ETask);
 
     cell.appendChild(inputButton);
   }
@@ -371,7 +371,7 @@ function createInitPersons() {
     cell = row.insertCell();
     cell.appendChild(inputButton);
 
-    var inputButton = addDeleteButton(i, personsArray[i].id);
+    var inputButton = addDeleteButton(i, personsArray[i].id, dataType.EPerson);
 
     cell.appendChild(inputButton);
   }
@@ -413,7 +413,7 @@ function createInitCategories() {
     cell = row.insertCell();
     cell.appendChild(inputButton);
 
-    var inputButton = addDeleteButton(i, tasksArray[i].id);
+    var inputButton = addDeleteButton(i, tasksArray[i].id, dataType.ECategory);
 
     cell.appendChild(inputButton);
   }
@@ -457,29 +457,86 @@ function createInitStatuses() {
     cell = row.insertCell();
     cell.appendChild(inputButton);
 
-    var inputButton = addDeleteButton(i, tasksArray[0].id);
+    var inputButton = addDeleteButton(i, tasksArray[0].id, dataType.EStatus);
 
     cell.appendChild(inputButton);
   }
 }
 
-function addDeleteButton(index, id) {
+function addDeleteButton(index, id, type) {
   var inputButton = document.createElement("Input");
   inputButton.setAttribute("type", "button");
   inputButton.setAttribute("id", "delete-button");
-  inputButton.onclick = (event) => {
-    if (
-      confirm(
-        "Wlasnie usuwasz produkt nr " + (index + 1) + ". Jestes pewny?"
-      ) == true
-    ) {
-      tasksArray = tasksArray.filter(
-        (task) => tasksArray.indexOf(task) != index
-      );
-      deleteData(id, urlTasks);
-      inputButton.parentNode.parentNode.remove();
-    }
-  };
+
+  switch (type) {
+    case dataType.ETask:
+      inputButton.onclick = (event) => {
+        if (
+          confirm(
+            "Wlasnie usuwasz zadanie nr " + (index + 1) + ". Jestes pewny?"
+          ) == true
+        ) {
+          tasksArray = tasksArray.filter(
+            (task) => tasksArray.indexOf(task) != index
+          );
+          deleteData(id, urlTasks);
+          inputButton.parentNode.parentNode.remove();
+        }
+      };
+      break;
+    case dataType.EPerson:
+      inputButton.onclick = (event) => {
+        if (
+          confirm(
+            "Właśnie usuwasz " +
+              (personsArray[index].firstName +
+                " " +
+                personsArray[index].lastName) +
+              ". Jesteś pewny?"
+          ) == true
+        ) {
+          personsArray = personsArray.filter(
+            (person) => personsArray.indexOf(person) != index
+          );
+          deleteData(id, urlPersons);
+          inputButton.parentNode.parentNode.remove();
+        }
+      };
+      break;
+    case dataType.ECategory:
+      inputButton.onclick = (event) => {
+        if (
+          confirm(
+            "Właśnie usuwasz kategorie " +
+              (categoriesArray[index].name + ". Jesteś pewny?")
+          ) == true
+        ) {
+          categoriesArray = categoriesArray.filter(
+            (category) => categoriesArray.indexOf(category) != index
+          );
+          deleteData(id, urlCategories);
+          inputButton.parentNode.parentNode.remove();
+        }
+      };
+      break;
+    case dataType.EStatus:
+      inputButton.onclick = (event) => {
+        if (
+          confirm(
+            "Właśnie usuwasz status " +
+              (statusesArray[index].name + ". Jesteś pewny?")
+          ) == true
+        ) {
+          statusesArray = statusesArray.filter(
+            (category) => statusesArray.indexOf(category) != index
+          );
+          deleteData(id, urlTaskStatuses);
+          inputButton.parentNode.parentNode.remove();
+        }
+      };
+      break;
+  }
+
   inputButton.setAttribute("value", "Usun");
   return inputButton;
 }
@@ -513,22 +570,20 @@ function addUpdateButton(table, array, index, id, type) {
       form = document.getElementById("edit-task-form").cloneNode(true);
       break;
   }
-  dlg = document.createElement("dialog");
-  var out = document.getElementById("out");
-  dlg.appendChild(form);
-  out.appendChild(dlg);
 
   inputButton.onclick = () => {
     form.reset();
     dlg.showModal();
-    console.log("INDEXONCLICK: " + index);
-    console.log("TYPEONCLICK: " + type);
     if (type == dataType.ETask) {
       AddValuesToNewTask();
     }
   };
 
-  console.log("PRZEDSWITCHEM: " + type);
+  dlg = document.createElement("dialog");
+  var out = document.getElementById("out");
+  dlg.appendChild(form);
+  out.appendChild(dlg);
+
   switch (type) {
     case dataType.ETask:
       form.onsubmit = () => {
@@ -607,7 +662,7 @@ function addDataToTable(table, array, type) {
   cell = row.insertCell();
   cell.appendChild(inputButton);
 
-  var inputButton = addDeleteButton(index, array[index].id);
+  var inputButton = addDeleteButton(index, array[index].id, type);
   cell.appendChild(inputButton);
 
   if (index % 2 == 0) row.style.backgroundColor = "LightGrey";
