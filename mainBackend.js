@@ -194,14 +194,16 @@ function sortTable() {
     switching = false;
     rows = table.rows;
 
-    for (i = 1; i < (rows.length - 1); i++) {
+    for (i = 1; i < rows.length - 1; i++) {
       shouldSwitch = false;
-      x = rows[i].cells[1]; // Załóżmy, że sortujemy według drugiej kolumny
+      x = rows[i].cells[1];
       y = rows[i + 1].cells[1];
 
-      // Sprawdzanie kierunku sortowania i decydowanie o przełączeniu
-      if ((isAscending && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) ||
-          (!isAscending && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase())) {
+      if (
+        (isAscending &&
+          x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) ||
+        (!isAscending && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase())
+      ) {
         shouldSwitch = true;
         break;
       }
@@ -367,7 +369,7 @@ function AddValuesToNewTask(id, type) {
 
 function createInitPersons() {
   var caption = personsTable.createCaption();
-  caption.innerHTML = "<b>Łosoby<b/> ";
+  caption.innerHTML = "<b>Osoby<b/> ";
 
   var form = document.getElementById("addPersonForm");
   var dlg = document.getElementById("add-person-dialog");
@@ -799,7 +801,7 @@ function addCreateButton(type, form, dlg) {
       sortButton = document.getElementById("sort-button");
       sortButton.onclick = () => {
         sortTable();
-      }
+      };
 
       form.onsubmit = async (event) => {
         let newObject = new Task(

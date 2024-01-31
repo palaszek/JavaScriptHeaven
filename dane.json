@@ -14,73 +14,61 @@
   ],
   "Tasks": [
     {
-      "taskName": "baranina na cienkim",
-      "assignedPerson": "Nie przypisano",
+      "taskName": "Przykładowe Zadanie",
+      "assignedPerson": "Krzysztof Kolumb",
       "category": "Brak Kategorii",
       "status": "Rozpoczęty",
       "id": 23
     },
     {
-      "taskName": "test",
-      "assignedPerson": "Nie przypisano",
-      "category": "Brak Kategorii",
-      "status": "Rozpoczęty",
+      "taskName": "CSS",
+      "assignedPerson": "Antoni Kononowicz",
+      "category": "Grafika",
+      "status": "W Realizacji",
       "id": 32
     },
     {
-      "taskName": "legocity2",
-      "assignedPerson": "lego city potrzebuje pomocy",
-      "category": "peepo",
-      "status": "sttus",
+      "taskName": "dadad",
+      "assignedPerson": "Michalina Piotrkowska",
+      "category": "Programowanie",
+      "status": "Przykladowy statis",
       "id": 34
-    },
-    {
-      "taskName": "test",
-      "assignedPerson": "Nie przypisano",
-      "category": "Brak Kategorii",
-      "status": "Rozpoczęty",
-      "id": 35
-    },
-    {
-      "taskName": "teścik",
-      "assignedPerson": "Nie przypisano",
-      "category": "Brak Kategorii",
-      "status": "Rozpoczęty",
-      "id": 36
-    },
-    {
-      "taskName": "akacja",
-      "assignedPerson": "Nie przypisano",
-      "category": "test",
-      "status": "Rozpoczęty",
-      "id": 37
     }
   ],
   "Persons": [
     {
-      "firstName": "Nie",
-      "lastName": "przypisano",
+      "firstName": "Nie przypisano",
+      "lastName": "Nie przypisano",
       "id": 1
     },
     {
-      "firstName": "lego city",
-      "lastName": "potrzebuje pomocy",
+      "firstName": "Krzysztof",
+      "lastName": "Kolumb",
       "id": 2
     },
     {
-      "firstName": "test",
-      "lastName": "test",
+      "firstName": "Piotr",
+      "lastName": "Mickiewiczowski",
       "id": 3
+    },
+    {
+      "firstName": "Antoni",
+      "lastName": "Kononowicz",
+      "id": 4
     }
   ],
   "Categories": [
     {
-      "name": "test",
+      "name": "Grafika",
       "id": 1
     },
     {
-      "name": "peepo",
+      "name": "Programowanie",
       "id": 2
+    },
+    {
+      "name": "Brak Kategorii",
+      "id": 3
     }
   ],
   "TaskStatuses": [
@@ -97,7 +85,7 @@
       "id": 3
     },
     {
-      "name": "sttus",
+      "name": "Przykladowy statis",
       "id": 4
     }
   ]
